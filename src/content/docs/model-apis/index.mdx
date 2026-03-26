@@ -1,0 +1,140 @@
+---
+title: Model APIs
+description: Explore available AI models and their capabilities.
+section: Reference
+order: 5
+prev:
+  title: User Guide
+  href: /docs/user-guide
+next:
+  title: Pricing
+  href: /docs/pricing
+---
+
+import Callout from '../../../components/Callout.astro';
+
+## Available Models
+
+Nebula API provides access to a wide range of AI models through a unified interface.
+
+### Nebula Models
+
+| Model | Context | Best For | Speed |
+|-------|---------|----------|-------|
+| `nebula-3-pro` | 128K | General purpose, high quality | Fast |
+| `nebula-3-turbo` | 64K | Fast responses, cost effective | Very Fast |
+| `nebula-3-vision` | 128K | Image understanding | Fast |
+| `nebula-3-code` | 64K | Code generation & analysis | Fast |
+
+### Third-Party Models
+
+| Model | Provider | Context | Status |
+|-------|----------|---------|--------|
+| `gpt-4o` | OpenAI | 128K | Available |
+| `claude-3.5-sonnet` | Anthropic | 200K | Available |
+| `gemini-pro` | Google | 1M | Available |
+| `llama-3.1-70b` | Meta | 128K | Available |
+
+<Callout type="info">
+  All models are accessed through the same endpoint and SDK methods. Simply change the `model` parameter to switch between models.
+</Callout>
+
+## Chat Completions API
+
+### Endpoint
+
+```
+POST https://api.nebula.ai/v1/chat/completions
+```
+
+### Request Body
+
+```json
+{
+  "model": "nebula-3-pro",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a helpful assistant."
+    },
+    {
+      "role": "user",
+      "content": "What is the capital of France?"
+    }
+  ],
+  "temperature": 0.7,
+  "max_tokens": 1000,
+  "stream": false
+}
+```
+
+### Response
+
+```json
+{
+  "id": "chat-abc123",
+  "object": "chat.completion",
+  "created": 1700000000,
+  "model": "nebula-3-pro",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "The capital of France is Paris."
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 25,
+    "completion_tokens": 8,
+    "total_tokens": 33
+  }
+}
+```
+
+## Embeddings API
+
+### Endpoint
+
+```
+POST https://api.nebula.ai/v1/embeddings
+```
+
+### Example
+
+```javascript
+const response = await client.embeddings.create({
+  model: 'nebula-embed-v2',
+  input: 'The quick brown fox jumps over the lazy dog.',
+});
+
+console.log(response.data[0].embedding); // [0.0023, -0.0091, ...]
+```
+
+## Images API
+
+### Generate Images
+
+```javascript
+const response = await client.images.generate({
+  model: 'nebula-diffusion-xl',
+  prompt: 'A serene mountain landscape at sunset',
+  size: '1024x1024',
+  n: 1,
+});
+
+console.log(response.data[0].url);
+```
+
+<Callout type="warning">
+  Image generation models have separate rate limits. Check the [Pricing](/docs/pricing) page for details.
+</Callout>
+
+## Model Selection Guide
+
+- **General chat & reasoning**: Use `nebula-3-pro` for the best balance of quality and speed
+- **High throughput**: Use `nebula-3-turbo` for cost-effective, fast responses
+- **Code tasks**: Use `nebula-3-code` for specialized code generation
+- **Vision tasks**: Use `nebula-3-vision` for image analysis and understanding

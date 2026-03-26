@@ -1,0 +1,77 @@
+---
+title: Getting Started
+description: Get up and running with Nebula API in minutes.
+section: Getting Started
+order: 1
+next:
+  title: Windows Platform
+  href: /docs/installation/windows
+---
+
+import Callout from '../../../components/Callout.astro';
+
+Welcome to Nebula API! This guide will walk you through the essentials to get your first API call working.
+
+## Prerequisites
+
+Before you begin, make sure you have:
+
+- A Nebula API account ([sign up here](#))
+- Node.js 18.x LTS or later installed
+- A code editor of your choice
+
+## Quick Start
+
+### 1. Get Your API Key
+
+After creating your account, navigate to the **API Keys** section in your dashboard. Click **Create New Key** and copy the generated key.
+
+<Callout type="important">
+  Keep your API key secure. Never expose it in client-side code or public repositories.
+</Callout>
+
+### 2. Install the SDK
+
+```bash
+npm install @nebula-api/sdk
+```
+
+### 3. Make Your First Request
+
+```javascript
+import { NebulaClient } from '@nebula-api/sdk';
+
+const client = new NebulaClient({
+  apiKey: process.env.NEBULA_API_KEY,
+});
+
+const response = await client.chat.completions.create({
+  model: 'nebula-3-pro',
+  messages: [
+    { role: 'user', content: 'Hello, Nebula!' }
+  ],
+});
+
+console.log(response.choices[0].message.content);
+```
+
+### 4. Verify It Works
+
+Run your script:
+
+```bash
+node index.js
+```
+
+You should see Nebula's response printed to the console.
+
+## What's Next?
+
+- **[Installation Guide](/docs/installation/windows)** — Set up your development environment
+- **[User Guide](/docs/user-guide)** — Learn advanced usage patterns
+- **[Model APIs](/docs/model-apis)** — Explore available models and endpoints
+- **[Pricing](/docs/pricing)** — Understand our pricing model
+
+<Callout type="tip">
+  Join our [Discord community](/docs/community) for real-time support and discussions with other developers.
+</Callout>

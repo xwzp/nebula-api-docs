@@ -1,0 +1,41 @@
+---
+interface Link {
+  title: string;
+  href: string;
+}
+
+interface Props {
+  prev?: Link;
+  next?: Link;
+}
+
+const { prev, next } = Astro.props;
+---
+
+{(prev || next) && (
+  <div class="flex justify-between items-center mt-12 pt-6 border-t border-light-border dark:border-dark-border">
+    {prev ? (
+      <a href={prev.href} class="group flex items-center gap-2 text-sm text-light-text-muted dark:text-dark-text-muted hover:text-accent-purple transition-colors">
+        <svg class="w-4 h-4 transition-transform group-hover:-translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+        <div>
+          <div class="text-xs text-light-text-muted dark:text-dark-text-muted">Previous</div>
+          <div class="font-medium text-light-text dark:text-dark-text group-hover:text-accent-purple">{prev.title}</div>
+        </div>
+      </a>
+    ) : <div />}
+
+    {next ? (
+      <a href={next.href} class="group flex items-center gap-2 text-sm text-right text-light-text-muted dark:text-dark-text-muted hover:text-accent-purple transition-colors">
+        <div>
+          <div class="text-xs text-light-text-muted dark:text-dark-text-muted">Next</div>
+          <div class="font-medium text-light-text dark:text-dark-text group-hover:text-accent-purple">{next.title}</div>
+        </div>
+        <svg class="w-4 h-4 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+        </svg>
+      </a>
+    ) : <div />}
+  </div>
+)}

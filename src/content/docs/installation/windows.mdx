@@ -1,0 +1,115 @@
+---
+title: Windows Platform Installation Node.js
+description: Configure your Windows development environment to start building with Nebula API using Node.js.
+section: Environment Setup > Windows
+order: 2
+prev:
+  title: Getting Started
+  href: /docs/getting-started
+next:
+  title: macOS / Linux
+  href: /docs/installation/macos-linux
+---
+
+import Callout from '../../../components/Callout.astro';
+
+<Callout type="important">
+  Ensure you are running Windows 10 or later. We recommend using the **v18 LTS (Long Term Support)** version of Node.js for maximum stability with the Nebula SDK.
+</Callout>
+
+## Prerequisites
+
+- Windows 10 or later (64-bit)
+- Administrator access
+- At least 500MB of free disk space
+- Internet connection
+
+## Installation Methods
+
+### Official MSI Installer
+
+The easiest way for beginners. Download the pre-built installer and follow the guided wizard.
+
+1. Visit the [Node.js downloads page](https://nodejs.org/en/download/)
+2. Download the **Windows Installer (.msi)** for the LTS version
+3. Run the installer and follow the prompts
+4. Accept the license agreement
+5. Choose the default installation path
+
+<Callout type="tip">
+  Check the box for **"Automatically install the necessary tools"** during installation to set up build tools and Chocolatey automatically.
+</Callout>
+
+### Using Chocolatey
+
+Perfect for power users. Install Node.js directly from your PowerShell terminal with one command.
+
+First, ensure Chocolatey is installed:
+
+```powershell
+Set-ExecutionPolicy Bypass -Scope Process -Force
+[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
+iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+```
+
+Then install Node.js:
+
+```powershell
+choco install nodejs-lts
+```
+
+## Verification
+
+Open your Command Prompt (cmd) or PowerShell and verify that Node.js and npm are correctly installed:
+
+```bash
+node -v
+npm -v
+```
+
+Expected output:
+
+```
+v18.18.0
+9.8.1
+```
+
+<Callout type="info">
+  Your version numbers may differ slightly. As long as Node.js is 18.x or higher and npm is 9.x or higher, you're good to go.
+</Callout>
+
+## Configure Environment Variables
+
+After installation, verify that Node.js is in your system PATH:
+
+1. Open **Settings** > **System** > **About** > **Advanced system settings**
+2. Click **Environment Variables**
+3. Under **System variables**, find and select **Path**
+4. Verify that the Node.js installation directory is listed (typically `C:\Program Files\nodejs\`)
+
+## Install Nebula SDK
+
+Now you're ready to install the Nebula SDK:
+
+```bash
+mkdir my-nebula-project
+cd my-nebula-project
+npm init -y
+npm install @nebula-api/sdk
+```
+
+## FAQ
+
+**Q: Should I use the LTS or Current version?**
+We recommend LTS for production projects. Current versions may have breaking changes.
+
+**Q: Can I use nvm-windows instead?**
+Yes! [nvm-windows](https://github.com/coreybutler/nvm-windows) is a great tool for managing multiple Node.js versions:
+
+```powershell
+nvm install 18
+nvm use 18
+```
+
+**Q: The installer doesn't start. What should I do?**
+Try right-clicking the `.msi` file and selecting **"Run as administrator"**.

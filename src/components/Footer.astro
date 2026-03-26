@@ -1,0 +1,123 @@
+---
+import Logo from './Logo.astro';
+
+interface Props {
+  variant?: 'landing' | 'docs';
+}
+
+const { variant = 'docs' } = Astro.props;
+const isDark = variant === 'landing';
+
+const columns = [
+  {
+    title: 'Product',
+    links: [
+      { title: 'Features', href: '#' },
+      { title: 'Models', href: '/docs/model-apis' },
+      { title: 'Pricing', href: '/docs/pricing' },
+    ],
+  },
+  {
+    title: 'Company',
+    links: [
+      { title: 'About', href: '#' },
+      { title: 'Blog', href: '#' },
+      { title: 'Contact', href: '#' },
+    ],
+  },
+  {
+    title: 'Legal',
+    links: [
+      { title: 'Privacy', href: '#' },
+      { title: 'Terms', href: '#' },
+    ],
+  },
+];
+---
+
+<footer class:list={[
+  "border-t",
+  isDark
+    ? "bg-dark-bg border-dark-border"
+    : "bg-light-surface border-light-border dark:bg-dark-bg dark:border-dark-border"
+]}>
+  <div class="max-w-[1400px] mx-auto px-6 py-12">
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-8">
+      <div class="col-span-2">
+        <Logo dark={isDark} />
+        <p class:list={[
+          "mt-3 text-sm max-w-xs",
+          isDark
+            ? "text-dark-text-muted"
+            : "text-light-text-muted dark:text-dark-text-muted"
+        ]}>
+          Leading the charge in democratizing high-performance AI access for developers and enterprises worldwide.
+        </p>
+      </div>
+
+      {columns.map((col) => (
+        <div>
+          <h4 class:list={[
+            "font-display font-semibold text-sm mb-3",
+            isDark
+              ? "text-white"
+              : "text-light-text dark:text-white"
+          ]}>
+            {col.title}
+          </h4>
+          <ul class="space-y-2">
+            {col.links.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class:list={[
+                    "text-sm transition-colors",
+                    isDark
+                      ? "text-dark-text-muted hover:text-white"
+                      : "text-light-text-muted hover:text-light-text dark:text-dark-text-muted dark:hover:text-white"
+                  ]}
+                >
+                  {link.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <div class:list={[
+      "mt-10 pt-6 border-t flex flex-col md:flex-row justify-between items-center gap-4",
+      isDark
+        ? "border-dark-border"
+        : "border-light-border dark:border-dark-border"
+    ]}>
+      <p class:list={[
+        "text-sm",
+        isDark
+          ? "text-dark-text-muted"
+          : "text-light-text-muted dark:text-dark-text-muted"
+      ]}>
+        &copy; 2024 Nebula API. All rights reserved.
+      </p>
+      <div class="flex items-center gap-4">
+        <a href="#" class:list={[
+          "text-sm transition-colors",
+          isDark
+            ? "text-dark-text-muted hover:text-white"
+            : "text-light-text-muted hover:text-light-text dark:text-dark-text-muted dark:hover:text-white"
+        ]}>
+          Twitter
+        </a>
+        <a href="#" class:list={[
+          "text-sm transition-colors",
+          isDark
+            ? "text-dark-text-muted hover:text-white"
+            : "text-light-text-muted hover:text-light-text dark:text-dark-text-muted dark:hover:text-white"
+        ]}>
+          GitHub
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>

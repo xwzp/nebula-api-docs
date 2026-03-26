@@ -1,0 +1,107 @@
+---
+title: macOS / Linux Installation Node.js
+description: Set up Node.js on macOS or Linux for developing with Nebula API.
+section: Environment Setup > macOS / Linux
+order: 3
+prev:
+  title: Windows Platform
+  href: /docs/installation/windows
+next:
+  title: User Guide
+  href: /docs/user-guide
+---
+
+import Callout from '../../../components/Callout.astro';
+
+## Using nvm (Recommended)
+
+The best way to manage Node.js on macOS and Linux is through **nvm** (Node Version Manager).
+
+### Install nvm
+
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+```
+
+After installation, restart your terminal or run:
+
+```bash
+source ~/.bashrc   # or ~/.zshrc on macOS
+```
+
+### Install Node.js
+
+```bash
+nvm install 18
+nvm use 18
+nvm alias default 18
+```
+
+### Verify Installation
+
+```bash
+node -v   # Should output v18.x.x
+npm -v    # Should output 9.x.x
+```
+
+## Using Homebrew (macOS)
+
+If you prefer Homebrew:
+
+```bash
+brew install node@18
+```
+
+Then add to your PATH:
+
+```bash
+echo 'export PATH="/opt/homebrew/opt/node@18/bin:$PATH"' >> ~/.zshrc
+source ~/.zshrc
+```
+
+## Using Package Manager (Linux)
+
+### Ubuntu / Debian
+
+```bash
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+sudo apt-get install -y nodejs
+```
+
+### Fedora / RHEL
+
+```bash
+curl -fsSL https://rpm.nodesource.com/setup_18.x | sudo bash -
+sudo dnf install -y nodejs
+```
+
+## Install Nebula SDK
+
+```bash
+mkdir my-nebula-project && cd my-nebula-project
+npm init -y
+npm install @nebula-api/sdk
+```
+
+<Callout type="tip">
+  On macOS, if you encounter permission errors with global npm installs, use nvm instead of the Homebrew installation — it handles permissions automatically.
+</Callout>
+
+## Configuring Environment Variables
+
+Set your Nebula API key as an environment variable:
+
+```bash
+# Add to ~/.bashrc or ~/.zshrc
+export NEBULA_API_KEY="your-api-key-here"
+```
+
+Then reload:
+
+```bash
+source ~/.bashrc   # or ~/.zshrc
+```
+
+<Callout type="important">
+  Never commit your API key to version control. Use `.env` files and add them to `.gitignore`.
+</Callout>

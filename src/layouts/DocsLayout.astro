@@ -1,0 +1,64 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Sidebar from '../components/Sidebar.astro';
+import TOC from '../components/TOC.astro';
+import PrevNext from '../components/PrevNext.astro';
+
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface Link {
+  title: string;
+  href: string;
+}
+
+interface Props {
+  title: string;
+  description?: string;
+  section?: string;
+  headings?: Heading[];
+  prev?: Link;
+  next?: Link;
+}
+
+const { title, description, section, headings = [], prev, next } = Astro.props;
+---
+
+<BaseLayout title={`${title} - Nebula API Docs`} description={description}>
+  <div class="min-h-screen bg-light-bg dark:bg-dark-bg transition-colors">
+    <Header variant="docs" />
+
+    <div class="max-w-[1400px] mx-auto px-6">
+      <div class="flex gap-8 py-8">
+        <Sidebar />
+
+        <main class="flex-1 min-w-0">
+          {section && (
+            <div class="flex items-center gap-2 text-sm text-light-text-muted dark:text-dark-text-muted mb-4">
+              <a href="/docs/getting-started" class="hover:text-accent-purple transition-colors">Documentation</a>
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+              <span>{section}</span>
+            </div>
+          )}
+
+          <article class="docs-content">
+            <slot />
+          </article>
+
+          <PrevNext prev={prev} next={next} />
+        </main>
+
+        <TOC headings={headings} />
+      </div>
+    </div>
+
+    <Footer variant="docs" />
+  </div>
+</BaseLayout>

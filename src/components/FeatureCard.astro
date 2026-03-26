@@ -1,0 +1,36 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  icon: string;
+  glowColor?: 'pink' | 'purple' | 'blue';
+}
+
+const { title, description, icon, glowColor = 'purple' } = Astro.props;
+
+const glowMap = {
+  pink: 'hover:shadow-glow-pink',
+  purple: 'hover:shadow-glow-purple',
+  blue: 'hover:shadow-glow-blue',
+};
+
+const iconColorMap = {
+  pink: 'from-accent-pink to-accent-magenta',
+  purple: 'from-accent-purple to-accent-pink',
+  blue: 'from-accent-blue to-accent-purple',
+};
+---
+
+<div class:list={[
+  "glow-card rounded-2xl p-6 group",
+  glowMap[glowColor]
+]}>
+  <div class:list={[
+    "w-10 h-10 rounded-xl bg-gradient-to-br flex items-center justify-center mb-4",
+    iconColorMap[glowColor]
+  ]}>
+    <span class="text-white text-lg">{icon}</span>
+  </div>
+  <h3 class="font-display font-semibold text-white mb-2">{title}</h3>
+  <p class="text-sm text-dark-text-muted leading-relaxed">{description}</p>
+</div>
