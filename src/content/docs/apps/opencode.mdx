@@ -1,0 +1,76 @@
+---
+title: OpenCode
+description: 开源 AI 编程助手，终端中的智能编码伙伴。
+section: 第三方应用
+order: 24
+---
+
+import Callout from '../../../components/Callout.astro';
+
+OpenCode 是一款开源的 AI 编程助手，可在终端、IDE 或桌面环境中辅助编写、调试和改进代码。
+
+## 功能特点
+
+- **原生终端 TUI** — 专为命令行开发者设计，高效流畅
+- **智能 LSP 加载** — 自动加载正确的语言服务器
+- **多会话并行** — 支持多个会话同时运行
+- **会话链接共享** — 可分享会话链接给他人协作
+- **75+ 模型支持** — 支持多种模型提供商，包括本地模型
+- **多平台支持** — 终端 CLI、桌面应用、IDE 扩展
+
+## 安装与配置
+
+### 第一步：安装 OpenCode
+
+```bash
+npm install -g opencode-ai
+```
+
+安装完成后，运行 `opencode` 命令，若出现 TUI 界面则安装成功。
+
+### 第二步：安装 CC-Switch
+
+查看 [CC-Switch 配置工具](/docs/tools/cc-switch) 文档，下载并安装。
+
+### 第三步：添加供应商
+
+1. 打开 CC-Switch，上方配置项选择 `OpenCode`
+2. 点击 **添加供应商** 按钮
+3. 填写配置信息：
+
+| 配置项 | 说明 |
+|--------|------|
+| 预设供应商 | 选择 `IkunCode` |
+| 供应商标识 | 自定义名称 |
+| 接口格式 | Claude 选 `Anthropic`；GPT 选 `OpenAI`；Gemini 选 `Google (Gemini)` |
+| API Key | 您的 API Key |
+| 额外选项 | `{"setCacheKey":true}` |
+
+<Callout type="tip">
+  根据需要的模型类型，选择正确分组的 API Key：
+  - **Claude 系列**: 逆向分组
+  - **GPT 系列**: Codex 分组
+  - **Gemini 系列**: Gemini 分组
+</Callout>
+
+## 验证配置
+
+1. 重新打开终端，运行 `opencode`
+2. 输入 `/models` 命令
+3. 检查配置的渠道是否出现在模型列表中
+
+## 常见问题
+
+### npm 未找到？
+
+请先安装 Node.js 环境，参考 [Node.js 环境安装](/docs/installation/windows) 文档。
+
+### 看不到配置的渠道？
+
+- 确认 CC-Switch 中已正确保存配置
+- 重启终端后再次运行 `opencode`
+- 检查 API Key 是否填写正确
+
+## 相关链接
+
+- [OpenCode GitHub](https://github.com/opencode-ai/opencode)

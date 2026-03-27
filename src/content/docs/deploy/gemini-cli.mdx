@@ -1,0 +1,101 @@
+---
+title: Gemini CLI 部署
+description: 安装和配置 Gemini CLI，Google AI 编程助手。
+section: 部署指南
+order: 13
+---
+
+import Callout from '../../../components/Callout.astro';
+
+Gemini CLI 是 Google 的 AI 编程助手，由 Gemini 2.5 Pro 驱动。
+
+## 使用 CC-Switch 快速配置（推荐）
+
+<Callout type="warning">
+  使用 CC-Switch 配置前，请确保已通过 npm 全局安装 Gemini CLI：
+  ```bash
+  npm install -g @google/gemini-cli
+  ```
+</Callout>
+
+推荐使用 [CC-Switch 快速配置工具](/docs/tools/cc-switch) 进行图形化配置。
+
+### 配置步骤
+
+1. 打开 CC-Switch，点击顶部的「Gemini」标签页
+2. 点击右上角 **"+"** 按钮添加新配置
+3. 填写配置信息：
+   - **提供商名称**: 自定义名称
+   - **Base URL**: `https://api.nebula.ai`
+   - **API Key**: 您的 Gemini 专用令牌
+   - **Model**: `gemini-3-pro-preview`
+4. 点击「保存」，然后启用配置
+
+## 手动命令行配置
+
+### 1. 安装 Gemini CLI
+
+```bash
+npm install -g @google/gemini-cli
+```
+
+### 2. 创建配置目录
+
+```bash
+mkdir -p ~/.gemini
+cd ~/.gemini
+```
+
+### 3. 创建 .env 文件
+
+```bash
+cat > .env << 'EOF'
+GOOGLE_GEMINI_BASE_URL=https://api.nebula.ai
+GEMINI_API_KEY=your-api-key
+GEMINI_MODEL=gemini-3-pro-preview
+EOF
+```
+
+### 4. 创建 settings.json 文件
+
+```bash
+cat > settings.json << 'EOF'
+{
+  "ide": {
+    "enabled": true
+  },
+  "security": {
+    "auth": {
+      "selectedType": "gemini-api-key"
+    }
+  }
+}
+EOF
+```
+
+### 5. 启动 Gemini CLI
+
+```bash
+gemini
+```
+
+## 配置文件位置
+
+- **Windows**: `%USERPROFILE%\.gemini\`
+- **macOS/Linux**: `~/.gemini/`
+
+<Callout type="important">
+  - 确保从平台创建 Gemini CLI 专用令牌
+  - Gemini 令牌与 Claude Code/CodeX 令牌不通用
+  - 切换配置后需要重启 Gemini CLI 才能生效
+</Callout>
+
+## 常见问题
+
+### API Key 在哪里获取？
+
+登录平台控制台，创建 Gemini CLI 专用令牌。
+
+### 更多问题
+
+请查看 [常见问题](/docs/community) 页面。

@@ -1,0 +1,116 @@
+---
+title: 疑难杂症
+description: 常见问题排查和解决方案。
+section: 支持与 FAQ
+order: 31
+---
+
+import Callout from '../../../components/Callout.astro';
+
+遇到问题？这里汇总了常见问题的排查和解决方案。
+
+## 连接问题
+
+### 无法连接到 API
+
+**症状**: 提示 `connection refused` 或 `timeout`
+
+**排查步骤**:
+
+1. 检查网络连接
+2. 确认 API 地址配置正确
+3. 检查代理设置
+4. 尝试 ping API 服务器
+
+```bash
+# 测试连接
+curl -I https://api.nebula.ai/health
+```
+
+### 认证失败
+
+**症状**: 提示 `401 Unauthorized` 或 `Invalid API Key`
+
+**解决方案**:
+
+1. 确认 Key 正确且未过期
+2. 检查环境变量是否正确设置
+3. 确认账户余额充足
+
+```bash
+# 检查环境变量
+echo $ANTHROPIC_AUTH_TOKEN
+```
+
+## 性能问题
+
+### 响应速度慢
+
+可能原因：
+
+- 网络延迟
+- 服务器负载高
+- 请求内容过长
+
+解决方案：
+
+- 检查网络质量
+- 避开高峰时段
+- 简化提示词
+
+### 频繁超时
+
+```bash
+# 增加超时时间
+claude --timeout 120000
+```
+
+## 工具问题
+
+### Claude Code 无法启动
+
+**排查步骤**:
+
+1. 检查 Node.js 版本
+
+```bash
+node --version  # 需要 v18+
+```
+
+2. 重新安装
+
+```bash
+npm uninstall -g @anthropic-ai/claude-code
+npm install -g @anthropic-ai/claude-code
+```
+
+### 权限问题
+
+<Callout type="warning">
+  Linux/macOS 用户如遇到权限问题，请勿使用 sudo 安装全局包。
+</Callout>
+
+配置 npm 使用用户目录：
+
+```bash
+mkdir -p ~/.npm-global
+npm config set prefix '~/.npm-global'
+export PATH=~/.npm-global/bin:$PATH
+```
+
+## 其他问题
+
+### 余额不足
+
+访问 [控制台](https://dash.nebula.ai) 充值。
+
+### 账户问题
+
+联系客服处理：
+
+- Telegram: [@nebula_support](https://t.me/nebula_support)
+- 邮箱: support@nebula.ai
+
+<Callout type="info">
+  遇到其他问题？加入 [社群](/docs/community) 寻求帮助。
+</Callout>

@@ -1,0 +1,51 @@
+---
+title: Claude Code Hub
+description: 团队级多供应商 AI Coding 代理调度平台。
+section: 配置工具
+order: 11
+---
+
+import Callout from '../../../components/Callout.astro';
+
+Claude Code Hub (CCH) 是一个团队级多供应商 AI Coding 代理调度平台，可作为服务器部署的多租户工具，让团队通过单一接口管理多个 AI 供应商。
+
+## 核心功能
+
+- **负载均衡** — 支持权重、优先级和分组调度
+- **多供应商支持** — Claude、Codex、Gemini 和 OpenAI 兼容服务
+- **速率限制** — RPM 限制、金额限制和并发会话控制
+- **实时监控** — 使用指标和供应商健康状态仪表板
+- **会话管理** — 5 分钟上下文缓存和粘性路由
+- **OpenAI 兼容** — 通过 `/v1/chat/completions` 端点访问
+
+## 适用场景
+
+- 敏捷开发团队
+- AI 密集型开发环境
+- 预算有限的初创公司
+- 需要合规审计的企业
+
+## 技术架构
+
+| 组件 | 技术 |
+|------|------|
+| 前端 | Next.js |
+| 后端 | Hono |
+| 数据库 | PostgreSQL + Redis |
+| 许可证 | MIT |
+
+## 部署方式
+
+使用一键安装脚本：
+
+```bash
+curl -fsSL https://cch.example.com/install.sh | bash
+```
+
+<Callout type="info">
+  Claude Code Hub 适合需要统一管理多个 AI 供应商的团队使用。
+</Callout>
+
+## 相关链接
+
+- [GitHub 仓库](https://github.com/example/claude-code-hub)

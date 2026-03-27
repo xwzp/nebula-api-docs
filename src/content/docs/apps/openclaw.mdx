@@ -1,0 +1,121 @@
+---
+title: OpenClaw
+description: 多平台 AI 编程代理，支持终端 TUI、Web Dashboard 和 Telegram Bot。
+section: 第三方应用
+order: 25
+---
+
+import Callout from '../../../components/Callout.astro';
+
+OpenClaw 是一款功能丰富的 AI 编程代理工具，支持终端 TUI 交互、Web Dashboard 管理和 Telegram Bot 远程访问。
+
+<Callout type="warning">
+  此教程适合 **Linux 云服务器** 和 **macOS** 系统用户。
+</Callout>
+
+## 功能特点
+
+- **终端 TUI** — 命令行交互界面，适合 SSH 环境
+- **Web Dashboard** — 浏览器可视化管理面板
+- **Telegram Bot** — 支持通过 Telegram 远程对话
+- **多模型支持** — Claude、GPT、Gemini 等
+- **Gateway 网关** — 内置网关服务，支持反向代理
+- **Skill 扩展** — 可通过 Dashboard 安装扩展技能
+
+## 安装与初始化
+
+### 第一步：运行安装脚本
+
+```bash
+curl -fsSL https://openclaw.ai/install.sh | bash
+```
+
+### 第二步：初始化配置
+
+按照安装向导选择：
+
+| 步骤 | 选择 | 说明 |
+|------|------|------|
+| 启动方式 | QuickStart | 快速开始模式 |
+| 供应商设置 | Skip for now | 后续手动配置 |
+| 适配器选择 | anthropic | 选择 Anthropic |
+| 模型选择 | opus-4.5 | 或其他模型 |
+| Shell 补全 | yes | 安装命令行补全 |
+
+## 渠道与模型配置
+
+### 编辑配置文件
+
+```bash
+vim ~/.openclaw/openclaw.json
+```
+
+<Callout type="important">
+  使用中转服务时，**必须**在供应商配置中添加 `headers` 字段，否则请求会返回 403：
+
+  ```json
+  "headers": {
+    "User-Agent": "claude-cli/2.0.76 (external, cli)",
+    "Authorization": "Bearer sk-xxxx"
+  }
+  ```
+
+  - `Authorization` 的值必须与 `apiKey` 一致
+  - `User-Agent` 必须保持示例中的格式
+</Callout>
+
+### 重启网关
+
+```bash
+openclaw gateway restart
+```
+
+### 验证配置
+
+```bash
+openclaw tui
+```
+
+测试成功后输入 `/quit` 退出。
+
+## 浏览器访问 Dashboard
+
+运行命令获取 Dashboard URL，在浏览器中访问即可进入管理面板。
+
+### 服务器用户注意
+
+如果在远程服务器运行，需要：
+
+1. 使用 Nginx 配置反向代理和 SSL
+2. 编辑配置文件添加：
+   ```json
+   "controlUi": {
+     "allowInsecureAuth": true
+   }
+   ```
+3. 重启网关
+
+## 配置 Telegram Bot
+
+1. 通过 @BotFather 创建机器人，获取 Bot Token
+2. 与机器人对话，获取 Pairing Code
+3. 授权配对：
+   ```bash
+   openclaw pairing approve telegram 你的Pairing_Code
+   ```
+
+## 常见问题
+
+### 遇到 403 `Your request was blocked`？
+
+必须添加正确的 `headers` 字段，包含 `User-Agent` 和 `Authorization`。
+
+### Gateway 重启后模型仍不可用？
+
+- 检查 API Key 是否正确
+- 确认 Key 对应的分组支持所选模型
+- 查看 OpenClaw 日志排查错误
+
+## 相关链接
+
+- [OpenClaw 官网](https://openclaw.ai)

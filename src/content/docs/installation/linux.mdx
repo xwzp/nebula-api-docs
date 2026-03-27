@@ -1,0 +1,86 @@
+---
+title: Linux 平台安装 Node.js
+description: 在 Linux 上配置 Node.js 运行环境，为使用 Claude Code 等 AI 编程工具做准备。
+section: Node 安装 > Linux
+order: 4
+---
+
+import Callout from '../../../components/Callout.astro';
+
+<Callout type="important">
+  Claude Code、CodeX、Gemini CLI 都需要 Node.js 18+ 运行环境。
+</Callout>
+
+## 安装方法
+
+### Ubuntu / Debian
+
+使用 NodeSource 仓库安装：
+
+```bash
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+sudo apt-get install -y nodejs
+```
+
+### CentOS / RHEL
+
+```bash
+curl -fsSL https://rpm.nodesource.com/setup_18.x | sudo bash -
+sudo yum install -y nodejs
+```
+
+### Fedora
+
+```bash
+sudo dnf install nodejs
+```
+
+### Arch Linux
+
+```bash
+sudo pacman -S nodejs npm
+```
+
+### 使用 nvm（推荐）
+
+nvm 可以管理多个 Node.js 版本：
+
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+source ~/.bashrc
+nvm install 18
+nvm use 18
+nvm alias default 18
+```
+
+## 验证安装
+
+```bash
+node --version   # 应输出 v18.x.x
+npm --version    # 应输出 9.x.x
+```
+
+## 常见问题
+
+### 权限问题？
+
+配置 npm 使用用户目录，避免使用 sudo：
+
+```bash
+mkdir -p ~/.npm-global
+npm config set prefix '~/.npm-global'
+echo 'export PATH=~/.npm-global/bin:$PATH' >> ~/.bashrc
+source ~/.bashrc
+```
+
+### 版本太旧？
+
+系统默认仓库的 Node.js 版本可能较旧，建议使用 NodeSource 仓库或 nvm 获取最新 LTS 版本。
+
+## 下一步
+
+安装完成后，您可以继续：
+
+- **[部署 Claude Code](/docs/model-apis)** — 安装和配置 Claude Code
+- **[部署 CodeX](/docs/deploy/codex)** — 安装和配置 CodeX
+- **[部署 Gemini CLI](/docs/deploy/gemini-cli)** — 安装和配置 Gemini CLI

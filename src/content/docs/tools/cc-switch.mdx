@@ -1,0 +1,99 @@
+---
+title: CC-Switch 配置工具
+description: 跨平台桌面应用，统一管理 Claude Code、Codex 和 Gemini CLI。
+section: 配置工具
+order: 10
+---
+
+import Callout from '../../../components/Callout.astro';
+
+CC-Switch 是一款跨平台桌面应用，可以统一管理 Claude Code、Codex 和 Gemini CLI 三大 AI 编程工具的配置。
+
+## 功能特点
+
+- **配置切换** — 一键切换不同供应商配置
+- **MCP 服务器管理** — 统一管理 MCP 服务器
+- **系统提示词** — 管理和切换系统提示词模板
+- **Claude Skills** — 发现和安装 Claude Skills
+- **自动备份** — 保留最近 10 个版本的配置备份
+- **速度测试** — 测试不同 API 端点的响应速度
+
+## 安装方式
+
+### Windows
+
+下载 MSI 安装包或便携版 ZIP：
+
+- 从 [GitHub Releases](https://github.com/farion1231/cc-switch) 下载
+
+### macOS
+
+使用 Homebrew 安装：
+
+```bash
+brew install --cask cc-switch
+```
+
+或手动下载 DMG 安装。
+
+### Linux
+
+- **Debian/Ubuntu**: 下载 .deb 包
+- **通用**: 下载 AppImage
+- **Arch Linux**: 从 AUR 安装
+
+## 快速开始
+
+### 1. 添加供应商配置
+
+1. 打开 CC-Switch 应用
+2. 点击右上角 **"+"** 按钮添加新配置
+3. 填写配置信息：
+   - **提供商名称**: 自定义名称（如 "Nebula"）
+   - **Base URL**: `https://api.nebula.ai`
+   - **API Key**: 您的 API Key
+   - **Model**: 选择模型
+
+### 2. 启用配置
+
+1. 在配置列表中找到刚创建的配置
+2. 点击 **"当前使用"** 按钮
+3. 重启对应的 AI 工具即可生效
+
+### 3. 系统托盘快速切换
+
+CC-Switch 支持通过系统托盘快速切换配置：
+
+- 右键点击系统托盘图标
+- 选择要切换到的配置
+- 配置立即生效
+
+## 高级功能
+
+### 速度测试
+
+测试不同供应商的 API 响应速度，选择最快的节点。
+
+### 系统提示词管理
+
+- 创建和管理系统提示词模板
+- 支持导入/导出
+- 快速切换不同场景
+
+### MCP 服务器配置
+
+统一配置和管理 MCP 服务器，自动同步到各工具。
+
+### Claude Skills
+
+- 扫描本地 Skills 目录
+- 发现和安装新 Skills
+- 管理已安装的 Skills
+
+<Callout type="tip">
+  切换配置后需要重启对应的 AI 工具才能生效。
+</Callout>
+
+## 相关链接
+
+- [GitHub 仓库](https://github.com/farion1231/cc-switch)

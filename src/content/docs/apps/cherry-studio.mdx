@@ -1,0 +1,106 @@
+---
+title: CherryStudio 客户端
+description: 全能的 AI 助手桌面客户端。
+section: 第三方应用
+order: 23
+---
+
+import Callout from '../../../components/Callout.astro';
+
+CherryStudio 是一款功能强大的 AI 助手桌面应用，支持多种主流 AI 模型（Claude、Gemini、GPT 等）。
+
+## 功能特点
+
+- **多模型支持** — 支持 Claude、Gemini、GPT 等主流 AI 模型
+- **统一界面** — 一个应用管理所有 AI 服务
+- **自定义 API** — 支持接入自定义 API 提供商
+- **跨平台** — 支持 Windows、macOS、Linux
+- **本地优先** — 数据存储在本地，保护隐私
+- **丰富功能** — 对话管理、模型切换、参数调整等
+
+## 安装步骤
+
+### 第一步：下载安装
+
+访问 [CherryStudio 下载页面](https://www.cherry-ai.com/download)，根据操作系统选择：
+
+- **Windows**: `.exe` 安装程序
+- **macOS**: `.dmg` 镜像文件
+- **Linux**: `.AppImage` 或 `.deb` 包
+
+### 第二步：获取 API Key
+
+从平台控制台创建对应的令牌：
+
+- **Claude 模型**: 选择逆向分组
+- **Gemini 模型**: 选择 gemini 分组
+
+## 配置 Claude 模型
+
+1. 打开 CherryStudio，进入「设置」
+2. 选择「模型配置」
+3. 配置参数：
+   - **提供商类型**: `Anthropic`
+   - **API 地址**: `https://api.nebula.ai/v1/messages`
+   - **API Key**: 您的 Claude API Key
+   - **模型名称**: `claude-sonnet-4-5-20250929`
+
+## 配置 Gemini 模型
+
+1. 选择 Gemini 模型类型
+2. 配置参数：
+   - **提供商类型**: `Gemini`
+   - **API 地址**: `https://api.nebula.ai/v1beta/models`
+   - **API Key**: 您的 Gemini API Key
+   - **模型名称**: `gemini-3-flash-preview`
+
+<Callout type="important">
+  Gemini 和 Claude 需要使用不同的 API Key（不同的令牌组）。
+</Callout>
+
+## 开始使用
+
+### 创建新对话
+
+1. 点击「新建对话」
+2. 选择已配置的模型
+3. 开始与 AI 对话
+
+### 调整参数
+
+- **Temperature**: 控制回复的随机性（0-1）
+- **Max Tokens**: 控制回复长度
+- **Top P**: 控制采样范围
+
+<Callout type="tip">
+  - 编程任务：Temperature 0.2-0.5（更准确）
+  - 创意写作：Temperature 0.7-0.9（更有创意）
+  - 日常对话：Temperature 0.5-0.7（平衡）
+</Callout>
+
+## 最佳实践
+
+### 合理选择模型
+
+- **代码编写**: Claude Sonnet 4.5
+- **快速对话**: Gemini 3 Flash Preview
+- **复杂推理**: Claude Opus 4.5
+- **多模态任务**: Gemini 3 Pro Preview
+
+## 常见问题
+
+### API Key 无效？
+
+- 检查 API Key 是否完整复制
+- 确认令牌组选择正确
+- 查看账户余额是否充足
+
+### 模型列表为空？
+
+- 确认 API 地址正确
+- 检查网络连接
+- 重新获取 API Key
+
+## 相关链接
+
+- [CherryStudio 官网](https://www.cherry-ai.com/)

@@ -1,0 +1,68 @@
+---
+title: CodeX 部署
+description: 安装和配置 CodeX，GPT-5 架构的 AI 编程助手。
+section: 部署指南
+order: 12
+---
+
+import Callout from '../../../components/Callout.astro';
+
+CodeX 是基于 GPT-5 架构的 AI 编程助手，本指南将帮助您在 Windows、macOS 和 Linux 上完成部署。
+
+## 使用 CC-Switch 快速配置（推荐）
+
+推荐使用 [CC-Switch 快速配置工具](/docs/tools/cc-switch) 进行图形化配置，简单快捷无需命令行操作。
+
+## 手动命令行配置
+
+### 安装 CodeX
+
+```bash
+npm install -g @openai/codex-cli
+```
+
+### 配置文件
+
+配置文件位置：
+- **Windows**: `%USERPROFILE%\.codex\`
+- **macOS/Linux**: `~/.codex/`
+
+创建配置文件 `config.json`：
+
+```json
+{
+  "baseUrl": "https://api.nebula.ai/v1",
+  "apiKey": "your-api-key",
+  "model": "gpt-5.4"
+}
+```
+
+### 启动 CodeX
+
+```bash
+codex
+```
+
+## 配置参数
+
+| 参数 | 说明 |
+|------|------|
+| Base URL | `https://api.nebula.ai/v1` |
+| Model | `gpt-5.4` 或其他可用模型 |
+| 令牌组 | 必须使用 "codex" 专用令牌 |
+
+<Callout type="important">
+  务必从平台创建「codex」令牌组的专用密钥，CodeX 令牌与 Claude Code 令牌不通用。
+</Callout>
+
+## 常见问题
+
+### 配置不生效？
+
+配置后需重启 CodeX 才能生效。
+
+### 连接失败？
+
+1. 检查 API Key 是否正确
+2. 确认使用了 codex 令牌组
+3. 检查账户余额

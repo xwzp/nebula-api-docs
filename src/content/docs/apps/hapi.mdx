@@ -1,0 +1,96 @@
+---
+title: Hapi 远程控制
+description: 本地优先的 AI 编程助手远程控制工具。
+section: 第三方应用
+order: 20
+---
+
+import Callout from '../../../components/Callout.astro';
+
+Hapi 是一个本地优先的应用程序，可以让你在本地运行 Claude Code / Codex / Gemini 会话，并通过 Web / PWA / Telegram Mini App 进行远程控制。
+
+## 核心功能
+
+- **无缝切换** — 在本地原生环境和远程控制之间无缝切换
+- **远程会话** — 从任何设备发起远程会话
+- **移动监控** — 通过手机或浏览器监控和管理任务
+- **权限控制** — 远程批准/拒绝工具权限
+- **文件浏览** — 浏览文件和查看 git diff
+- **进度跟踪** — 通过待办事项列表跟踪进度
+- **多后端支持** — 支持 Claude Code、Codex、Gemini
+
+## 安装步骤
+
+### 第一步：安装 Hapi
+
+使用 npx 快速启动 Hapi 服务器：
+
+```bash
+npx @twsxtd/hapi server
+```
+
+启动后会显示 Token 凭证和访问地址。
+
+<Callout type="important">
+  请务必保存好 Token 凭证！这是你连接和控制 Hapi 服务的唯一凭证。
+</Callout>
+
+### 第二步：启动 AI 会话
+
+在项目目录下执行以下命令启动对应的 AI 服务：
+
+```bash
+# 启动 Claude Code
+hapi claude
+
+# 启动 Codex
+hapi codex
+
+# 启动 Gemini
+hapi gemini
+```
+
+此时你已经可以在本地局域网内通过 `http://<server-ip>:3006` 访问和控制你的 AI 编程助手了！
+
+## 配置 Cloudflare 内网穿透
+
+如果你想在任何地方（包括外网）访问 Hapi 服务，可以通过 Cloudflare Tunnel 实现内网穿透。
+
+### 前置要求
+
+- 一个域名（任意域名均可）
+- Cloudflare 账号（免费账号即可）
+
+### 配置流程
+
+1. 登录 Cloudflare Zero Trust 控制台
+2. 创建新的 Tunnel
+3. 安装 cloudflared 客户端
+4. 配置公共主机名
+5. 设置服务地址为 `localhost:3006`
+
+## 使用 Hapi
+
+配置完成后，你可以：
+
+- **本地访问**: `http://localhost:3006`
+- **局域网访问**: `http://<server-ip>:3006`
+- **公网访问**: `https://your-domain.com`（如果配置了 Cloudflare Tunnel）
+
+<Callout type="tip">
+  - 在手机浏览器中访问可以随时随地监控任务进度
+  - 可以安装为 PWA 应用，获得类似原生应用的体验
+  - 支持多设备同时连接和控制
+</Callout>
+
+## 安全建议
+
+- 不要将 Token 泄露给他人
+- 如果使用公网访问，建议启用 Cloudflare 的安全功能
+- 定期更换 Token
+- 仅在可信网络环境下使用
+
+## 相关链接
+
+- [Hapi 官网](https://hapi.run/)
+- [GitHub 仓库](https://github.com/tiann/hapi)
