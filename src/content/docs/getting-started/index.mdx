@@ -1,77 +1,57 @@
 ---
-title: Getting Started
-description: Get up and running with Nebula API in minutes.
-section: Getting Started
+title: 欢迎使用
+description: Nebula API 使用文档，帮助您快速上手 AI 编程工具。
+section: 首页
 order: 1
 next:
-  title: Windows Platform
+  title: Windows 平台
   href: /docs/installation/windows
 ---
 
 import Callout from '../../../components/Callout.astro';
 
-Welcome to Nebula API! This guide will walk you through the essentials to get your first API call working.
+欢迎来到 Nebula API！我们致力于为开发者提供稳定、高效的 AI 编程工具中转服务。
 
-## Prerequisites
+## 什么是中转站？
 
-Before you begin, make sure you have:
+中转站即您和目标服务商之间的一座桥梁。通过 Nebula API，您可以：
 
-- A Nebula API account ([sign up here](#))
-- Node.js 18.x LTS or later installed
-- A code editor of your choice
+- **免翻墙直连** — 无需任何科学上网工具，稳定可靠
+- **价格实惠** — 低于官方定价，让更多开发者用得起
+- **专业运维** — 专人维护、一对一售后、问题快速响应
+- **一站式服务** — 支持 Claude Code、CodeX、Gemini CLI 等多种 AI 编程工具
 
-## Quick Start
+## 快速开始
 
-### 1. Get Your API Key
+只需四步即可开始使用：
 
-After creating your account, navigate to the **API Keys** section in your dashboard. Click **Create New Key** and copy the generated key.
-
-<Callout type="important">
-  Keep your API key secure. Never expose it in client-side code or public repositories.
-</Callout>
-
-### 2. Install the SDK
-
-```bash
-npm install @nebula-api/sdk
-```
-
-### 3. Make Your First Request
-
-```javascript
-import { NebulaClient } from '@nebula-api/sdk';
-
-const client = new NebulaClient({
-  apiKey: process.env.NEBULA_API_KEY,
-});
-
-const response = await client.chat.completions.create({
-  model: 'nebula-3-pro',
-  messages: [
-    { role: 'user', content: 'Hello, Nebula!' }
-  ],
-});
-
-console.log(response.choices[0].message.content);
-```
-
-### 4. Verify It Works
-
-Run your script:
-
-```bash
-node index.js
-```
-
-You should see Nebula's response printed to the console.
-
-## What's Next?
-
-- **[Installation Guide](/docs/installation/windows)** — Set up your development environment
-- **[User Guide](/docs/user-guide)** — Learn advanced usage patterns
-- **[Model APIs](/docs/model-apis)** — Explore available models and endpoints
-- **[Pricing](/docs/pricing)** — Understand our pricing model
+1. **注册账号** — 访问官网完成注册
+2. **创建 Key** — 获取您的专属 API 密钥
+3. **安装 Node.js** — 配置运行环境
+4. **部署工具** — 开始使用 Claude Code 等工具
 
 <Callout type="tip">
-  Join our [Discord community](/docs/community) for real-time support and discussions with other developers.
+  推荐使用我们的 [CC-Switch 配置工具](#)，可以一键完成所有配置。
 </Callout>
+
+## 核心优势
+
+| 特性 | 说明 |
+|------|------|
+| 免翻墙 | 直连访问，无需科学上网工具 |
+| 低价格 | 通过运营优化，价格低于官方 |
+| 专业支持 | 7×24 监控，技术支持快速响应 |
+| 多工具 | 一个账户访问多种 AI 编程工具 |
+
+## 安全承诺
+
+<Callout type="info">
+  我们不会存储您的代码内容，所有数据传输均经过加密，API Key 仅用于身份验证。
+</Callout>
+
+## 下一步
+
+- **[Windows 平台安装](/docs/installation/windows)** — 在 Windows 上配置 Node.js
+- **[macOS 平台安装](/docs/installation/macos-linux)** — 在 macOS 上配置 Node.js
+- **[注册账号](/docs/user-guide)** — 创建您的 Nebula API 账户
+- **[充值](/docs/pricing)** — 了解定价和充值方式

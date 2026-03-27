@@ -1,73 +1,76 @@
 ---
-title: Windows Platform Installation Node.js
-description: Configure your Windows development environment to start building with Nebula API using Node.js.
-section: Environment Setup > Windows
+title: Windows 平台安装 Node.js
+description: 在 Windows 上配置 Node.js 运行环境，为使用 Claude Code 等 AI 编程工具做准备。
+section: Node 安装 > Windows
 order: 2
 prev:
-  title: Getting Started
+  title: 欢迎使用
   href: /docs/getting-started
 next:
-  title: macOS / Linux
+  title: macOS 平台
   href: /docs/installation/macos-linux
 ---
 
 import Callout from '../../../components/Callout.astro';
 
 <Callout type="important">
-  Ensure you are running Windows 10 or later. We recommend using the **v18 LTS (Long Term Support)** version of Node.js for maximum stability with the Nebula SDK.
+  Claude Code、CodeX、Gemini CLI 都需要 Node.js 18+ 运行环境。请确保安装 LTS（长期支持）版本以获得最佳稳定性。
 </Callout>
 
-## Prerequisites
+## 环境要求
 
-- Windows 10 or later (64-bit)
-- Administrator access
-- At least 500MB of free disk space
-- Internet connection
+- Windows 10 或更高版本（64 位）
+- 管理员权限
+- 至少 500MB 可用磁盘空间
+- 网络连接
 
-## Installation Methods
+## 安装方法
 
-### Official MSI Installer
+### 方法一：官方安装包（推荐新手）
 
-The easiest way for beginners. Download the pre-built installer and follow the guided wizard.
+最简单的方式，下载安装包按向导操作即可。
 
-1. Visit the [Node.js downloads page](https://nodejs.org/en/download/)
-2. Download the **Windows Installer (.msi)** for the LTS version
-3. Run the installer and follow the prompts
-4. Accept the license agreement
-5. Choose the default installation path
+1. 访问 [Node.js 官网下载页面](https://nodejs.org/en/download/)
+2. 下载 **Windows Installer (.msi)** LTS 版本
+3. 运行安装程序，按默认选项安装
+4. 完成安装
 
 <Callout type="tip">
-  Check the box for **"Automatically install the necessary tools"** during installation to set up build tools and Chocolatey automatically.
+  安装过程中建议勾选 **"Automatically install the necessary tools"**，自动配置构建工具。
 </Callout>
 
-### Using Chocolatey
+### 方法二：包管理器
 
-Perfect for power users. Install Node.js directly from your PowerShell terminal with one command.
+适合熟悉命令行的用户，可以选择以下任一方式：
 
-First, ensure Chocolatey is installed:
+**使用 Winget：**
 
 ```powershell
-Set-ExecutionPolicy Bypass -Scope Process -Force
-[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
-iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+winget install OpenJS.NodeJS.LTS
 ```
 
-Then install Node.js:
+**使用 Chocolatey：**
 
 ```powershell
 choco install nodejs-lts
 ```
 
-## Verification
+**使用 Scoop：**
 
-Open your Command Prompt (cmd) or PowerShell and verify that Node.js and npm are correctly installed:
-
-```bash
-node -v
-npm -v
+```powershell
+scoop install nodejs-lts
 ```
 
-Expected output:
+## 验证安装
+
+打开 PowerShell 或命令提示符，执行以下命令：
+
+```bash
+node --version
+npm --version
+```
+
+预期输出：
 
 ```
 v18.18.0
@@ -75,41 +78,39 @@ v18.18.0
 ```
 
 <Callout type="info">
-  Your version numbers may differ slightly. As long as Node.js is 18.x or higher and npm is 9.x or higher, you're good to go.
+  版本号可能略有不同，只要 Node.js 是 18.x 或更高版本即可。
 </Callout>
 
-## Configure Environment Variables
+## 常见问题
 
-After installation, verify that Node.js is in your system PATH:
+### 命令未找到？
 
-1. Open **Settings** > **System** > **About** > **Advanced system settings**
-2. Click **Environment Variables**
-3. Under **System variables**, find and select **Path**
-4. Verify that the Node.js installation directory is listed (typically `C:\Program Files\nodejs\`)
+如果提示 `node` 命令未找到：
 
-## Install Nebula SDK
+1. 重启终端或命令提示符
+2. 检查环境变量 PATH 是否包含 Node.js 安装路径（通常是 `C:\Program Files\nodejs\`）
 
-Now you're ready to install the Nebula SDK:
+### 安装失败？
 
-```bash
-mkdir my-nebula-project
-cd my-nebula-project
-npm init -y
-npm install @nebula-api/sdk
-```
+尝试以下方法：
 
-## FAQ
+1. 右键点击安装包，选择 **"以管理员身份运行"**
+2. 暂时关闭杀毒软件
+3. 确保网络连接正常
 
-**Q: Should I use the LTS or Current version?**
-We recommend LTS for production projects. Current versions may have breaking changes.
+### 使用 nvm-windows 管理多版本
 
-**Q: Can I use nvm-windows instead?**
-Yes! [nvm-windows](https://github.com/coreybutler/nvm-windows) is a great tool for managing multiple Node.js versions:
+如果需要管理多个 Node.js 版本，推荐使用 [nvm-windows](https://github.com/coreybutler/nvm-windows)：
 
 ```powershell
 nvm install 18
 nvm use 18
 ```
 
-**Q: The installer doesn't start. What should I do?**
-Try right-clicking the `.msi` file and selecting **"Run as administrator"**.
+## 下一步
+
+安装完成后，您可以继续：
+
+- **[部署 Claude Code](#)** — 安装和配置 Claude Code
+- **[部署 CodeX](#)** — 安装和配置 CodeX
+- **[部署 Gemini CLI](#)** — 安装和配置 Gemini CLI

@@ -1,77 +1,100 @@
 ---
-title: Pricing
-description: Transparent, pay-as-you-go pricing for all models.
-section: Pricing
+title: 充值
+description: 了解充值方式和账户余额管理。
+section: 使用指南
 order: 6
 prev:
-  title: Model APIs
+  title: 部署 Claude Code
   href: /docs/model-apis
 next:
-  title: Community
+  title: 常见问题
   href: /docs/community
 ---
 
 import Callout from '../../../components/Callout.astro';
 
-## Pricing Overview
+## 充值方式
 
-Nebula API uses a simple pay-as-you-go model. You only pay for the tokens you consume.
+Nebula API 平台支持以下在线充值方式：
 
-## Nebula Models
+- **支付宝**
+- **微信支付**
 
-| Model | Input (per 1M tokens) | Output (per 1M tokens) |
-|-------|----------------------|------------------------|
-| `nebula-3-pro` | $3.00 | $15.00 |
-| `nebula-3-turbo` | $0.50 | $1.50 |
-| `nebula-3-vision` | $3.00 | $15.00 |
-| `nebula-3-code` | $1.00 | $5.00 |
-| `nebula-embed-v2` | $0.10 | — |
-| `nebula-diffusion-xl` | $0.04 / image | — |
+### 充值步骤
 
-## Third-Party Models
-
-| Model | Input (per 1M tokens) | Output (per 1M tokens) |
-|-------|----------------------|------------------------|
-| `gpt-4o` | $5.00 | $15.00 |
-| `claude-3.5-sonnet` | $3.00 | $15.00 |
-| `gemini-pro` | $1.25 | $5.00 |
-| `llama-3.1-70b` | $0.70 | $0.80 |
-
-<Callout type="tip">
-  Third-party model prices are up to **40% lower** than going direct, thanks to our volume agreements.
-</Callout>
-
-## Plans
-
-### Free Tier
-
-- $5 in free credits upon sign-up
-- 20 requests per minute
-- Access to all models
-- Community support
-
-### Pro Plan — $29/month
-
-- $50 in included credits
-- 200 requests per minute
-- Priority access to new models
-- Email support
-
-### Enterprise — Custom
-
-- Volume discounts
-- Custom rate limits
-- Dedicated support
-- SLA guarantees
-- SSO & audit logs
+1. 登录 Nebula API 控制台
+2. 进入 **"充值"** 页面
+3. 选择充值金额（10元、50元、100元等预设金额，或自定义金额）
+4. 选择支付方式
+5. 完成支付
 
 <Callout type="info">
-  All plans include access to every model. The difference is in rate limits, support level, and volume pricing.
+  两种支付方式均为即时到账。如超过 5 分钟未到账，请联系客服。
 </Callout>
 
-## Billing
+## 余额管理
 
-- Billed monthly based on usage
-- Credits never expire
-- Automatic top-up available
-- Detailed usage dashboard with per-model breakdowns
+在控制台可以查看：
+
+- 当前余额
+- 充值记录
+- 消费明细
+- 账单详情
+
+## 定价说明
+
+我们采用按量付费模式，根据实际使用的 token 数量计费。
+
+<Callout type="tip">
+  价格低于官方定价，通过运营优化让更多开发者用得起优质 AI 工具。
+</Callout>
+
+## 发票服务
+
+- 实际消费达 **500 元** 后可申请发票
+- 支持普票和专票
+- 大额开票请联系客服
+
+### 申请流程
+
+1. 确认消费金额达到开票门槛
+2. 在控制台提交开票申请
+3. 填写发票信息
+4. 等待处理（通常 1-3 个工作日）
+
+## 退款规则
+
+- 未使用的余额可申请退款
+- 已消费部分不支持退款
+- 退款需扣除一定手续费
+- 退款周期约 3-5 个工作日
+
+<Callout type="important">
+  退款前请确认账户内无待处理的消费订单。
+</Callout>
+
+## 常见问题
+
+### 充值失败怎么办？
+
+1. 检查网络连接是否正常
+2. 确认支付方式可用
+3. 尝试更换支付方式
+4. 联系客服获取帮助
+
+### 余额不足会怎样？
+
+余额不足时，API 请求会返回错误。请及时充值以继续使用服务。
+
+### 企业/大额充值
+
+企业用户或大额充值需求，请联系客服或群主：
+
+- 可获得更优惠的价格
+- 提供发票支持
+- 专属客服服务
+
+## 下一步
+
+- **[常见问题](/docs/community)** — 查看更多帮助
+- **[部署指南](/docs/model-apis)** — 开始使用 AI 工具

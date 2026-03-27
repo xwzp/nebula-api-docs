@@ -1,140 +1,137 @@
 ---
-title: Model APIs
-description: Explore available AI models and their capabilities.
-section: Reference
+title: 部署 Claude Code
+description: 安装和配置 Claude Code，开始使用 AI 编程助手。
+section: 部署指南
 order: 5
 prev:
-  title: User Guide
+  title: 注册账号
   href: /docs/user-guide
 next:
-  title: Pricing
+  title: 充值
   href: /docs/pricing
 ---
 
 import Callout from '../../../components/Callout.astro';
 
-## Available Models
+Claude Code 是 Anthropic 官方出品的 AI 编程 CLI 工具，可在终端中使用 Claude 进行代码编写和调试。
 
-Nebula API provides access to a wide range of AI models through a unified interface.
+## 安装方式
 
-### Nebula Models
+### Windows 平台
 
-| Model | Context | Best For | Speed |
-|-------|---------|----------|-------|
-| `nebula-3-pro` | 128K | General purpose, high quality | Fast |
-| `nebula-3-turbo` | 64K | Fast responses, cost effective | Very Fast |
-| `nebula-3-vision` | 128K | Image understanding | Fast |
-| `nebula-3-code` | 64K | Code generation & analysis | Fast |
+使用 PowerShell 安装：
 
-### Third-Party Models
+```powershell
+npm install -g @anthropic-ai/claude-code
+```
 
-| Model | Provider | Context | Status |
-|-------|----------|---------|--------|
-| `gpt-4o` | OpenAI | 128K | Available |
-| `claude-3.5-sonnet` | Anthropic | 200K | Available |
-| `gemini-pro` | Google | 1M | Available |
-| `llama-3.1-70b` | Meta | 128K | Available |
+### macOS / Linux 平台
 
-<Callout type="info">
-  All models are accessed through the same endpoint and SDK methods. Simply change the `model` parameter to switch between models.
+使用终端安装：
+
+```bash
+npm install -g @anthropic-ai/claude-code
+```
+
+或使用 Homebrew：
+
+```bash
+brew install claude-code
+```
+
+## 首次启动
+
+<Callout type="important">
+  使用第三方中转服务时，Claude Code 首次启动可能会报错："Unable to connect to Anthropic services"。这是正常现象，需要跳过初始确认。
 </Callout>
 
-## Chat Completions API
+### 方法一：使用 CC-Switch 工具（推荐）
 
-### Endpoint
+CC-Switch 是一个图形化配置工具，可以一键完成所有配置。
 
-```
-POST https://api.nebula.ai/v1/chat/completions
-```
+1. 下载并安装 [CC-Switch](https://github.com/farion1231/cc-switch)
+2. 添加 Nebula API 配置
+3. 切换到 Nebula API 服务商
+4. 启动 Claude Code
 
-### Request Body
+### 方法二：手动配置
+
+编辑 `~/.claude.json` 文件，添加以下内容：
 
 ```json
 {
-  "model": "nebula-3-pro",
-  "messages": [
-    {
-      "role": "system",
-      "content": "You are a helpful assistant."
-    },
-    {
-      "role": "user",
-      "content": "What is the capital of France?"
-    }
-  ],
-  "temperature": 0.7,
-  "max_tokens": 1000,
-  "stream": false
+  "hasCompletedOnboarding": true
 }
 ```
 
-### Response
+然后配置环境变量：
+
+```bash
+# macOS / Linux
+export ANTHROPIC_AUTH_TOKEN="your-api-key"
+export ANTHROPIC_BASE_URL="https://api.nebula.ai"
+
+# Windows PowerShell
+$env:ANTHROPIC_AUTH_TOKEN = "your-api-key"
+$env:ANTHROPIC_BASE_URL = "https://api.nebula.ai"
+```
+
+## 验证安装
+
+启动 Claude Code：
+
+```bash
+claude
+```
+
+如果看到 Claude Code 界面，说明安装成功。
+
+## 配置说明
+
+### 环境变量
+
+| 变量名 | 说明 |
+|--------|------|
+| `ANTHROPIC_AUTH_TOKEN` | 您的 API Key |
+| `ANTHROPIC_BASE_URL` | API 端点地址 |
+
+### 配置文件
+
+配置文件位于 `~/.claude.json`，主要参数：
 
 ```json
 {
-  "id": "chat-abc123",
-  "object": "chat.completion",
-  "created": 1700000000,
-  "model": "nebula-3-pro",
-  "choices": [
-    {
-      "index": 0,
-      "message": {
-        "role": "assistant",
-        "content": "The capital of France is Paris."
-      },
-      "finish_reason": "stop"
-    }
-  ],
-  "usage": {
-    "prompt_tokens": 25,
-    "completion_tokens": 8,
-    "total_tokens": 33
-  }
+  "hasCompletedOnboarding": true,
+  "apiKey": "your-api-key",
+  "baseUrl": "https://api.nebula.ai"
 }
 ```
 
-## Embeddings API
-
-### Endpoint
-
-```
-POST https://api.nebula.ai/v1/embeddings
-```
-
-### Example
-
-```javascript
-const response = await client.embeddings.create({
-  model: 'nebula-embed-v2',
-  input: 'The quick brown fox jumps over the lazy dog.',
-});
-
-console.log(response.data[0].embedding); // [0.0023, -0.0091, ...]
-```
-
-## Images API
-
-### Generate Images
-
-```javascript
-const response = await client.images.generate({
-  model: 'nebula-diffusion-xl',
-  prompt: 'A serene mountain landscape at sunset',
-  size: '1024x1024',
-  n: 1,
-});
-
-console.log(response.data[0].url);
-```
-
-<Callout type="warning">
-  Image generation models have separate rate limits. Check the [Pricing](/docs/pricing) page for details.
+<Callout type="tip">
+  推荐使用环境变量方式配置，更安全且便于管理。
 </Callout>
 
-## Model Selection Guide
+## 常见问题
 
-- **General chat & reasoning**: Use `nebula-3-pro` for the best balance of quality and speed
-- **High throughput**: Use `nebula-3-turbo` for cost-effective, fast responses
-- **Code tasks**: Use `nebula-3-code` for specialized code generation
-- **Vision tasks**: Use `nebula-3-vision` for image analysis and understanding
+### 连接失败？
+
+1. 检查网络连接是否正常
+2. 确认 API Key 是否正确
+3. 确认账户余额是否充足
+4. 检查是否选择了正确的令牌组
+
+### 响应慢？
+
+可以尝试：
+- 使用 CC-Switch 的速度测试功能选择最快的节点
+- 检查网络状况
+
+### 环境变量不生效？
+
+- **Windows**: 重启 PowerShell 或命令提示符
+- **macOS/Linux**: 运行 `source ~/.zshrc` 或 `source ~/.bashrc`
+
+## 下一步
+
+- **[充值](/docs/pricing)** — 为账户充值
+- **[常见问题](/docs/community)** — 查看更多帮助

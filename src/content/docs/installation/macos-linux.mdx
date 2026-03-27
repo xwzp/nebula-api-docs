@@ -1,35 +1,59 @@
 ---
-title: macOS / Linux Installation Node.js
-description: Set up Node.js on macOS or Linux for developing with Nebula API.
-section: Environment Setup > macOS / Linux
+title: macOS 平台安装 Node.js
+description: 在 macOS 上配置 Node.js 运行环境，为使用 Claude Code 等 AI 编程工具做准备。
+section: Node 安装 > macOS
 order: 3
 prev:
-  title: Windows Platform
+  title: Windows 平台
   href: /docs/installation/windows
 next:
-  title: User Guide
+  title: 注册账号
   href: /docs/user-guide
 ---
 
 import Callout from '../../../components/Callout.astro';
 
-## Using nvm (Recommended)
+<Callout type="important">
+  Claude Code、CodeX、Gemini CLI 都需要 Node.js 18+ 运行环境。
+</Callout>
 
-The best way to manage Node.js on macOS and Linux is through **nvm** (Node Version Manager).
+## 安装方法
 
-### Install nvm
+### 方法一：使用 Homebrew（推荐）
+
+Homebrew 是 macOS 最流行的包管理器。
+
+```bash
+brew install node
+```
+
+安装完成后验证：
+
+```bash
+node --version
+npm --version
+```
+
+<Callout type="tip">
+  如果 Homebrew 下载慢，可以切换到国内镜像源。
+</Callout>
+
+### 方法二：官方安装包
+
+1. 访问 [Node.js 官网](https://nodejs.org/)
+2. 下载 macOS LTS 版本（.pkg 文件）
+3. 双击运行安装程序
+4. 按提示完成安装
+
+### 方法三：使用 nvm
+
+nvm (Node Version Manager) 可以管理多个 Node.js 版本：
 
 ```bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 ```
 
-After installation, restart your terminal or run:
-
-```bash
-source ~/.bashrc   # or ~/.zshrc on macOS
-```
-
-### Install Node.js
+重启终端后安装 Node.js：
 
 ```bash
 nvm install 18
@@ -37,71 +61,59 @@ nvm use 18
 nvm alias default 18
 ```
 
-### Verify Installation
+## 验证安装
 
 ```bash
-node -v   # Should output v18.x.x
-npm -v    # Should output 9.x.x
+node --version   # 应输出 v18.x.x
+npm --version    # 应输出 9.x.x
 ```
 
-## Using Homebrew (macOS)
+## 常见问题
 
-If you prefer Homebrew:
+### Homebrew 下载慢？
+
+可以切换到国内镜像源：
 
 ```bash
-brew install node@18
+# 替换 Homebrew 镜像
+export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.ustc.edu.cn/brew.git"
+brew update
 ```
 
-Then add to your PATH:
+### 权限问题？
+
+如果遇到 npm 全局安装权限问题，推荐使用 nvm 代替 Homebrew 安装，nvm 自动处理权限问题。
+
+或者使用以下命令修复：
 
 ```bash
-echo 'export PATH="/opt/homebrew/opt/node@18/bin:$PATH"' >> ~/.zshrc
-source ~/.zshrc
-```
-
-## Using Package Manager (Linux)
-
-### Ubuntu / Debian
-
-```bash
-curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
-sudo apt-get install -y nodejs
-```
-
-### Fedora / RHEL
-
-```bash
-curl -fsSL https://rpm.nodesource.com/setup_18.x | sudo bash -
-sudo dnf install -y nodejs
-```
-
-## Install Nebula SDK
-
-```bash
-mkdir my-nebula-project && cd my-nebula-project
-npm init -y
-npm install @nebula-api/sdk
-```
-
-<Callout type="tip">
-  On macOS, if you encounter permission errors with global npm installs, use nvm instead of the Homebrew installation — it handles permissions automatically.
-</Callout>
-
-## Configuring Environment Variables
-
-Set your Nebula API key as an environment variable:
-
-```bash
-# Add to ~/.bashrc or ~/.zshrc
-export NEBULA_API_KEY="your-api-key-here"
-```
-
-Then reload:
-
-```bash
-source ~/.bashrc   # or ~/.zshrc
+sudo chown -R $(whoami) ~/.npm
 ```
 
 <Callout type="important">
-  Never commit your API key to version control. Use `.env` files and add them to `.gitignore`.
+  不建议使用 `sudo npm install`，这可能导致后续权限问题。
 </Callout>
+
+## 配置环境变量
+
+设置 API Key 环境变量：
+
+```bash
+# 添加到 ~/.zshrc 或 ~/.bashrc
+export ANTHROPIC_AUTH_TOKEN="your-api-key-here"
+export ANTHROPIC_BASE_URL="https://api.nebula.ai"
+```
+
+然后重新加载配置：
+
+```bash
+source ~/.zshrc   # 或 source ~/.bashrc
+```
+
+## 下一步
+
+安装完成后，您可以继续：
+
+- **[部署 Claude Code](#)** — 安装和配置 Claude Code
+- **[部署 CodeX](#)** — 安装和配置 CodeX
+- **[部署 Gemini CLI](#)** — 安装和配置 Gemini CLI
