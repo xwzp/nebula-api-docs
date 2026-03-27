@@ -29,25 +29,23 @@ interface Props {
 const { title, description, section, headings = [], prev, next } = Astro.props;
 ---
 
-<BaseLayout title={`${title} - Nebula API Docs`} description={description} enableThemeToggle={false}>
-  <div class="min-h-screen flex flex-col">
-    {/* Header: always light */}
+<BaseLayout title={`${title} - Nebula API Docs`} description={description}>
+  <div class="min-h-screen flex flex-col bg-white dark:bg-slate-900 transition-colors">
     <Header variant="docs" />
 
-    {/* Body: always dark */}
-    <div class="flex-1 bg-dark-bg">
-      <div class="max-w-[1400px] mx-auto px-6">
-        <div class="flex gap-8 py-8">
-          <Sidebar />
+    <div class="flex-1">
+      <div class="flex">
+        <Sidebar />
 
-          <main class="flex-1 min-w-0">
+        <main class="flex-1 min-w-0">
+          <div class="max-w-4xl px-8 pt-10 pb-12">
             {section && (
-              <div class="flex items-center gap-2 text-sm text-dark-text-muted mb-4">
+              <div class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 mb-4">
                 <a href="/docs/getting-started" class="hover:text-accent-purple transition-colors">Documentation</a>
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                 </svg>
-                <span>{section}</span>
+                <span class="text-pink-600 dark:text-pink-400 font-medium">{section}</span>
               </div>
             )}
 
@@ -56,13 +54,13 @@ const { title, description, section, headings = [], prev, next } = Astro.props;
             </article>
 
             <PrevNext prev={prev} next={next} />
-          </main>
+          </div>
+        </main>
 
-          <TOC headings={headings} />
-        </div>
+        <TOC headings={headings} />
       </div>
-
-      <Footer variant="docs" />
     </div>
+
+    <Footer />
   </div>
 </BaseLayout>
