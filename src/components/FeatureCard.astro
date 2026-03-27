@@ -2,35 +2,36 @@
 interface Props {
   title: string;
   description: string;
-  icon: string;
-  glowColor?: 'pink' | 'purple' | 'blue';
+  iconPath: string;
+  iconViewBox: string;
+  iconBg: string;
+  shadowColor: string;
 }
 
-const { title, description, icon, glowColor = 'purple' } = Astro.props;
-
-const glowMap = {
-  pink: 'hover:shadow-glow-pink',
-  purple: 'hover:shadow-glow-purple',
-  blue: 'hover:shadow-glow-blue',
-};
-
-const iconColorMap = {
-  pink: 'from-accent-pink to-accent-magenta',
-  purple: 'from-accent-purple to-accent-pink',
-  blue: 'from-accent-blue to-accent-purple',
-};
+const { title, description, iconPath, iconViewBox, iconBg, shadowColor } = Astro.props;
+const gradientId = `icon-grad-${title.replace(/\s+/g, '-').toLowerCase()}`;
 ---
 
-<div class:list={[
-  "glow-card rounded-2xl p-6 group",
-  glowMap[glowColor]
-]}>
-  <div class:list={[
-    "w-10 h-10 rounded-xl bg-gradient-to-br flex items-center justify-center mb-4",
-    iconColorMap[glowColor]
-  ]}>
-    <span class="text-white text-lg">{icon}</span>
+<div
+  class="relative bg-white dark:bg-slate-800/50 h-[282px] rounded-3xl p-8"
+  style={`box-shadow: 0 0 25px -5px ${shadowColor};`}
+>
+  <div aria-hidden="true" class="absolute inset-0 rounded-3xl border border-slate-100 dark:border-slate-700 pointer-events-none" />
+
+  <div class:list={["w-12 h-12 rounded-2xl flex items-center justify-center mb-8", iconBg]}>
+    <svg class="w-5 h-5" viewBox={iconViewBox} fill="none">
+      <defs>
+        <linearGradient id={gradientId} x1="0%" y1="50%" x2="100%" y2="50%">
+          <stop offset="0%" stop-color="#FF3BFF"/>
+          <stop offset="33.3%" stop-color="#EC4899"/>
+          <stop offset="66.7%" stop-color="#8B5CF6"/>
+          <stop offset="100%" stop-color="#3B82F6"/>
+        </linearGradient>
+      </defs>
+      <path d={iconPath} fill={`url(#${gradientId})`} />
+    </svg>
   </div>
-  <h3 class="font-display font-semibold text-light-text dark:text-white mb-2">{title}</h3>
-  <p class="text-sm text-light-text-muted dark:text-dark-text-muted leading-relaxed">{description}</p>
+
+  <h3 class="font-display font-bold text-xl text-slate-900 dark:text-white mb-3">{title}</h3>
+  <p class="text-base text-slate-600 dark:text-slate-400 leading-relaxed">{description}</p>
 </div>

@@ -13,24 +13,24 @@ const { prev, next } = Astro.props;
 ---
 
 {(prev || next) && (
-  <div class="flex justify-between items-center mt-12 pt-6 border-t border-dark-border">
+  <div class="flex justify-between items-center mt-12 pt-6 border-t border-slate-200 dark:border-slate-700">
     {prev ? (
-      <a href={prev.href} class="group flex items-center gap-2 text-sm text-dark-text-muted hover:text-accent-purple transition-colors">
+      <a href={prev.href} class="group flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 hover:text-accent-purple transition-colors">
         <svg class="w-4 h-4 transition-transform group-hover:-translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
         </svg>
         <div>
-          <div class="text-xs text-dark-text-muted">Previous</div>
-          <div class="font-medium text-dark-text group-hover:text-accent-purple">{prev.title}</div>
+          <div class="text-xs text-slate-400 dark:text-slate-500">Previous</div>
+          <div class="font-medium text-slate-700 dark:text-slate-200 group-hover:text-accent-purple">{prev.title}</div>
         </div>
       </a>
     ) : <div />}
 
     {next ? (
-      <a href={next.href} class="group flex items-center gap-2 text-sm text-right text-dark-text-muted hover:text-accent-purple transition-colors">
+      <a href={next.href} class="group flex items-center gap-2 text-sm text-right text-slate-500 dark:text-slate-400 hover:text-accent-purple transition-colors">
         <div>
-          <div class="text-xs text-dark-text-muted">Next</div>
-          <div class="font-medium text-dark-text group-hover:text-accent-purple">{next.title}</div>
+          <div class="text-xs text-slate-400 dark:text-slate-500">Next</div>
+          <div class="font-medium text-slate-700 dark:text-slate-200 group-hover:text-accent-purple">{next.title}</div>
         </div>
         <svg class="w-4 h-4 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
