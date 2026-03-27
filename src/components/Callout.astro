@@ -49,7 +49,7 @@ const s = styles[type];
       <p class:list={["font-semibold text-sm mb-1", s.icon]}>
         {title || s.defaultTitle}
       </p>
-      <div class="text-sm text-light-text-muted dark:text-dark-text-muted [&>p]:mb-0">
+      <div class="text-sm text-dark-text-muted [&>p]:mb-0">
         <slot />
       </div>
     </div>

@@ -7,108 +7,98 @@ interface Props {
 }
 
 const { variant = 'docs' } = Astro.props;
-const isDark = variant === 'landing';
 const currentPath = Astro.url.pathname;
 ---
 
-<header class:list={[
-  "sticky top-0 z-50 border-b backdrop-blur-xl",
-  isDark
-    ? "bg-dark-bg/80 border-dark-border"
-    : "bg-white/80 border-light-border"
-]}>
-  <div class="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between">
-    <div class="flex items-center gap-8">
-      <Logo dark={isDark} />
-      <nav class="hidden md:flex items-center gap-1">
-        {headerNav.map((item) => (
-          <a
-            href={item.href}
-            class:list={[
-              "px-3 py-1.5 rounded-lg text-sm font-medium transition-colors",
-              currentPath.startsWith(item.href)
-                ? isDark
-                  ? "bg-white/10 text-white"
-                  : "bg-accent-purple/10 text-accent-purple"
-                : isDark
-                  ? "text-dark-text-muted hover:text-white hover:bg-white/5"
+{variant === 'docs' ? (
+  <!-- Docs header: always light -->
+  <header class="sticky top-0 z-50 border-b backdrop-blur-xl bg-white/80 border-light-border">
+    <div class="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-8">
+        <Logo variant="light" />
+        <nav class="hidden md:flex items-center gap-1">
+          {headerNav.map((item) => (
+            <a
+              href={item.href}
+              class:list={[
+                "px-3 py-1.5 rounded-lg text-sm font-medium transition-colors",
+                currentPath.startsWith(item.href)
+                  ? "bg-accent-purple/10 text-accent-purple"
                   : "text-light-text-muted hover:text-light-text hover:bg-gray-100"
-            ]}
-          >
-            {item.title}
-          </a>
-        ))}
-      </nav>
+              ]}
+            >
+              {item.title}
+            </a>
+          ))}
+        </nav>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <button
+          class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm border border-light-border text-light-text-muted hover:border-accent-purple/50 transition-colors"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+          <span>Search...</span>
+          <kbd class="px-1.5 py-0.5 rounded text-xs bg-gray-100">⌘K</kbd>
+        </button>
+      </div>
     </div>
+  </header>
+) : (
+  <!-- Landing header: responsive light/dark -->
+  <header class="sticky top-0 z-50 border-b backdrop-blur-xl bg-white/80 dark:bg-dark-bg/80 border-light-border dark:border-dark-border">
+    <div class="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-8">
+        <Logo variant="responsive" />
+        <nav class="hidden md:flex items-center gap-1">
+          {headerNav.map((item) => (
+            <a
+              href={item.href}
+              class="px-3 py-1.5 rounded-lg text-sm font-medium transition-colors text-light-text-muted dark:text-dark-text-muted hover:text-light-text dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/5"
+            >
+              {item.title}
+            </a>
+          ))}
+        </nav>
+      </div>
 
-    <div class="flex items-center gap-3">
-      <button
-        id="search-btn"
-        class:list={[
-          "hidden md:flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm border transition-colors",
-          isDark
-            ? "border-dark-border text-dark-text-muted hover:border-accent-purple/50"
-            : "border-light-border text-light-text-muted hover:border-accent-purple/50"
-        ]}
-      >
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-        </svg>
-        <span>Search...</span>
-        <kbd class:list={[
-          "px-1.5 py-0.5 rounded text-xs",
-          isDark ? "bg-white/10" : "bg-gray-100"
-        ]}>⌘K</kbd>
-      </button>
+      <div class="flex items-center gap-3">
+        <button
+          id="theme-toggle"
+          class="p-2 rounded-lg transition-colors text-light-text-muted dark:text-dark-text-muted hover:text-light-text dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/10"
+          aria-label="Toggle theme"
+        >
+          <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+          </svg>
+          <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+          </svg>
+        </button>
 
-      <button
-        id="theme-toggle"
-        class:list={[
-          "p-2 rounded-lg transition-colors",
-          isDark
-            ? "text-dark-text-muted hover:text-white hover:bg-white/10"
-            : "text-light-text-muted hover:text-light-text hover:bg-gray-100"
-        ]}
-        aria-label="Toggle theme"
-      >
-        <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
-        </svg>
-        <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
-        </svg>
-      </button>
-
-      <a
-        href="/docs/getting-started"
-        class:list={[
-          "hidden md:flex rounded-lg border px-3 py-1.5 text-sm font-medium transition-colors",
-          isDark
-            ? "border-dark-border text-dark-text-muted hover:text-white hover:border-accent-purple/50"
-            : "border-light-border text-light-text hover:border-accent-purple/50"
-        ]}
-      >
-        System Status
-      </a>
+        <a
+          href="#"
+          class="hidden md:flex rounded-lg border px-3 py-1.5 text-sm font-medium transition-colors border-light-border dark:border-dark-border text-light-text dark:text-dark-text-muted hover:border-accent-purple/50"
+        >
+          System Status
+        </a>
+      </div>
     </div>
-  </div>
-</header>
+  </header>
 
-<script>
-  const toggle = document.getElementById('theme-toggle');
-  const html = document.documentElement;
+  <script>
+    const toggle = document.getElementById('theme-toggle');
+    const html = document.documentElement;
 
-  function setTheme(dark: boolean) {
-    html.classList.toggle('dark', dark);
-    localStorage.setItem('theme', dark ? 'dark' : 'light');
-  }
+    function setTheme(dark: boolean) {
+      html.classList.toggle('dark', dark);
+      localStorage.setItem('theme', dark ? 'dark' : 'light');
+    }
 
-  const saved = localStorage.getItem('theme');
-  if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-    setTheme(true);
-  }
-
-  toggle?.addEventListener('click', () => {
-    setTheme(!html.classList.contains('dark'));
-  });
-</script>
+    toggle?.addEventListener('click', () => {
+      setTheme(!html.classList.contains('dark'));
+    });
+  </script>
+)}

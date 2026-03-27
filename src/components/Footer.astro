@@ -6,7 +6,6 @@ interface Props {
 }
 
 const { variant = 'docs' } = Astro.props;
-const isDark = variant === 'landing';
 
 const columns = [
   {
@@ -35,89 +34,74 @@ const columns = [
 ];
 ---
 
-<footer class:list={[
-  "border-t",
-  isDark
-    ? "bg-dark-bg border-dark-border"
-    : "bg-light-surface border-light-border dark:bg-dark-bg dark:border-dark-border"
-]}>
-  <div class="max-w-[1400px] mx-auto px-6 py-12">
-    <div class="grid grid-cols-2 md:grid-cols-5 gap-8">
-      <div class="col-span-2">
-        <Logo dark={isDark} />
-        <p class:list={[
-          "mt-3 text-sm max-w-xs",
-          isDark
-            ? "text-dark-text-muted"
-            : "text-light-text-muted dark:text-dark-text-muted"
-        ]}>
-          Leading the charge in democratizing high-performance AI access for developers and enterprises worldwide.
-        </p>
-      </div>
-
-      {columns.map((col) => (
-        <div>
-          <h4 class:list={[
-            "font-display font-semibold text-sm mb-3",
-            isDark
-              ? "text-white"
-              : "text-light-text dark:text-white"
-          ]}>
-            {col.title}
-          </h4>
-          <ul class="space-y-2">
-            {col.links.map((link) => (
-              <li>
-                <a
-                  href={link.href}
-                  class:list={[
-                    "text-sm transition-colors",
-                    isDark
-                      ? "text-dark-text-muted hover:text-white"
-                      : "text-light-text-muted hover:text-light-text dark:text-dark-text-muted dark:hover:text-white"
-                  ]}
-                >
-                  {link.title}
-                </a>
-              </li>
-            ))}
-          </ul>
+{variant === 'docs' ? (
+  <!-- Docs footer: always dark -->
+  <footer class="border-t border-dark-border bg-dark-bg">
+    <div class="max-w-[1400px] mx-auto px-6 py-12">
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-8">
+        <div class="col-span-2">
+          <Logo variant="dark" />
+          <p class="mt-3 text-sm max-w-xs text-dark-text-muted">
+            Leading the charge in democratizing high-performance AI access for developers and enterprises worldwide.
+          </p>
         </div>
-      ))}
-    </div>
-
-    <div class:list={[
-      "mt-10 pt-6 border-t flex flex-col md:flex-row justify-between items-center gap-4",
-      isDark
-        ? "border-dark-border"
-        : "border-light-border dark:border-dark-border"
-    ]}>
-      <p class:list={[
-        "text-sm",
-        isDark
-          ? "text-dark-text-muted"
-          : "text-light-text-muted dark:text-dark-text-muted"
-      ]}>
-        &copy; 2024 Nebula API. All rights reserved.
-      </p>
-      <div class="flex items-center gap-4">
-        <a href="#" class:list={[
-          "text-sm transition-colors",
-          isDark
-            ? "text-dark-text-muted hover:text-white"
-            : "text-light-text-muted hover:text-light-text dark:text-dark-text-muted dark:hover:text-white"
-        ]}>
-          Twitter
-        </a>
-        <a href="#" class:list={[
-          "text-sm transition-colors",
-          isDark
-            ? "text-dark-text-muted hover:text-white"
-            : "text-light-text-muted hover:text-light-text dark:text-dark-text-muted dark:hover:text-white"
-        ]}>
-          GitHub
-        </a>
+        {columns.map((col) => (
+          <div>
+            <h4 class="font-display font-semibold text-sm mb-3 text-white">{col.title}</h4>
+            <ul class="space-y-2">
+              {col.links.map((link) => (
+                <li>
+                  <a href={link.href} class="text-sm transition-colors text-dark-text-muted hover:text-white">
+                    {link.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+      <div class="mt-10 pt-6 border-t border-dark-border flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-sm text-dark-text-muted">&copy; 2024 Nebula API. All rights reserved.</p>
+        <div class="flex items-center gap-4">
+          <a href="#" class="text-sm transition-colors text-dark-text-muted hover:text-white">Twitter</a>
+          <a href="#" class="text-sm transition-colors text-dark-text-muted hover:text-white">GitHub</a>
+        </div>
       </div>
     </div>
-  </div>
-</footer>
+  </footer>
+) : (
+  <!-- Landing footer: responsive light/dark -->
+  <footer class="border-t border-light-border dark:border-dark-border bg-light-surface dark:bg-dark-bg">
+    <div class="max-w-[1400px] mx-auto px-6 py-12">
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-8">
+        <div class="col-span-2">
+          <Logo variant="responsive" />
+          <p class="mt-3 text-sm max-w-xs text-light-text-muted dark:text-dark-text-muted">
+            Leading the charge in democratizing high-performance AI access for developers and enterprises worldwide.
+          </p>
+        </div>
+        {columns.map((col) => (
+          <div>
+            <h4 class="font-display font-semibold text-sm mb-3 text-light-text dark:text-white">{col.title}</h4>
+            <ul class="space-y-2">
+              {col.links.map((link) => (
+                <li>
+                  <a href={link.href} class="text-sm transition-colors text-light-text-muted dark:text-dark-text-muted hover:text-light-text dark:hover:text-white">
+                    {link.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+      <div class="mt-10 pt-6 border-t border-light-border dark:border-dark-border flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-sm text-light-text-muted dark:text-dark-text-muted">&copy; 2024 Nebula API. All rights reserved.</p>
+        <div class="flex items-center gap-4">
+          <a href="#" class="text-sm transition-colors text-light-text-muted dark:text-dark-text-muted hover:text-light-text dark:hover:text-white">Twitter</a>
+          <a href="#" class="text-sm transition-colors text-light-text-muted dark:text-dark-text-muted hover:text-light-text dark:hover:text-white">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+)}

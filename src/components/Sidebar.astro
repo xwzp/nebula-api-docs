@@ -8,11 +8,6 @@ function isActive(href?: string) {
   return currentPath === href || currentPath === href + '/';
 }
 
-function hasActiveChild(items?: { href?: string }[]) {
-  if (!items) return false;
-  return items.some((item) => isActive(item.href));
-}
-
 const icons: Record<string, string> = {
   rocket: 'M13 10V3L4 14h7v7l9-11h-7z',
   code: 'M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z',
@@ -30,15 +25,15 @@ const icons: Record<string, string> = {
         <li>
           {item.items ? (
             <div>
-              <div class="flex items-center gap-2 px-3 py-2 text-sm font-semibold text-light-text dark:text-dark-text">
+              <div class="flex items-center gap-2 px-3 py-2 text-sm font-semibold text-dark-text">
                 {item.icon && icons[item.icon] && (
-                  <svg class="w-4 h-4 text-light-text-muted dark:text-dark-text-muted" viewBox="0 0 24 24" fill="currentColor">
+                  <svg class="w-4 h-4 text-dark-text-muted" viewBox="0 0 24 24" fill="currentColor">
                     <path d={icons[item.icon]} />
                   </svg>
                 )}
                 {item.title}
               </div>
-              <ul class="ml-4 border-l border-light-border dark:border-dark-border space-y-0.5">
+              <ul class="ml-4 border-l border-dark-border space-y-0.5">
                 {item.items.map((child) => (
                   <li>
                     <a
@@ -47,7 +42,7 @@ const icons: Record<string, string> = {
                         "block pl-4 pr-3 py-1.5 text-sm rounded-r-lg transition-colors -ml-px border-l-2",
                         isActive(child.href)
                           ? "border-accent-purple bg-accent-purple/10 text-accent-purple font-medium"
-                          : "border-transparent text-light-text-muted dark:text-dark-text-muted hover:text-light-text dark:hover:text-dark-text hover:bg-gray-50 dark:hover:bg-white/5"
+                          : "border-transparent text-dark-text-muted hover:text-dark-text hover:bg-white/5"
                       ]}
                     >
                       {child.title}
@@ -63,7 +58,7 @@ const icons: Record<string, string> = {
                 "flex items-center gap-2 px-3 py-2 text-sm rounded-lg transition-colors",
                 isActive(item.href)
                   ? "bg-accent-purple/10 text-accent-purple font-medium"
-                  : "text-light-text-muted dark:text-dark-text-muted hover:text-light-text dark:hover:text-dark-text hover:bg-gray-50 dark:hover:bg-white/5"
+                  : "text-dark-text-muted hover:text-dark-text hover:bg-white/5"
               ]}
             >
               {item.icon && icons[item.icon] && (

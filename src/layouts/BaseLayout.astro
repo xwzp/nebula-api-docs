@@ -2,9 +2,10 @@
 interface Props {
   title: string;
   description?: string;
+  enableThemeToggle?: boolean;
 }
 
-const { title, description = 'Nebula API Documentation' } = Astro.props;
+const { title, description = 'Nebula API Documentation', enableThemeToggle = true } = Astro.props;
 ---
 
 <!doctype html>
@@ -24,11 +25,13 @@ const { title, description = 'Nebula API Documentation' } = Astro.props;
     <style is:global>
       @import '../styles/global.css';
     </style>
-    <script is:inline>
-      if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        document.documentElement.classList.add('dark');
-      }
-    </script>
+    {enableThemeToggle && (
+      <script is:inline>
+        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark');
+        }
+      </script>
+    )}
   </head>
   <body>
     <slot />

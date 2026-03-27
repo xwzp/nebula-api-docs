@@ -16,19 +16,18 @@ const filteredHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
 {filteredHeadings.length > 0 && (
   <aside class="w-56 shrink-0 hidden xl:block">
     <div class="sticky top-20">
-      <h4 class="text-xs font-semibold uppercase tracking-wider text-light-text-muted dark:text-dark-text-muted mb-3">
+      <h4 class="text-xs font-semibold uppercase tracking-wider text-dark-text-muted mb-3">
         On this page
       </h4>
       <nav>
-        <ul class="space-y-1.5 text-sm border-l border-light-border dark:border-dark-border">
+        <ul class="space-y-1.5 text-sm border-l border-dark-border">
           {filteredHeadings.map((heading) => (
             <li>
               <a
                 href={`#${heading.slug}`}
                 class:list={[
-                  "block -ml-px border-l-2 border-transparent py-0.5 transition-colors hover:text-accent-purple hover:border-accent-purple/50",
+                  "block -ml-px border-l-2 border-transparent py-0.5 transition-colors text-dark-text-muted hover:text-accent-purple hover:border-accent-purple/50",
                   heading.depth === 2 ? "pl-4" : "pl-7",
-                  "text-light-text-muted dark:text-dark-text-muted"
                 ]}
                 data-toc-link
               >
@@ -39,11 +38,11 @@ const filteredHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
         </ul>
       </nav>
 
-      <div class="mt-8 rounded-xl border border-light-border dark:border-dark-border p-4">
-        <p class="font-display font-semibold text-sm text-light-text dark:text-dark-text">
+      <div class="mt-8 rounded-xl border border-dark-border p-4">
+        <p class="font-display font-semibold text-sm text-dark-text">
           Need help?
         </p>
-        <p class="text-xs text-light-text-muted dark:text-dark-text-muted mt-1">
+        <p class="text-xs text-dark-text-muted mt-1">
           Join our developer Discord for real-time support.
         </p>
         <a
