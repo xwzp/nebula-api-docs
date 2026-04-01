@@ -13,32 +13,12 @@ next:
 
 import Callout from '../../../components/Callout.astro';
 
-访问我们的官网 [https://ai.nebulatrip.com/](https://ai.nebulatrip.com/)，可自行选择账号名注册，也可选择支持的一些其他站点快捷注册。
+访问我们的官网 <a href="https://ai.nebulatrip.com/" target="_blank">https://ai.nebulatrip.com/</a>，可自行选择账号名注册。
 
 ## 注册步骤
 
-1. 打开官网链接
-2. 点击 **"注册"** 按钮
-3. 选择注册方式：
-   - 使用邮箱注册
-   - 使用第三方账号快捷注册
-
-## 注册方式
-
-### 邮箱注册
-
-- 填写邮箱地址
-- 设置密码
-- 接收验证邮件
-- 完成注册
-
-### 快捷注册
-
-支持使用以下方式快速注册：
-
-- GitHub 账号
-- Google 账号
-- 其他支持的第三方平台
+1. 打开<a href="https://ai.nebulatrip.com/" target="_blank">官网</a>链接
+2. 点击 **<a href="https://ai.nebulatrip.com/register" target="_blank">"注册"</a>** 按钮
 
 <Callout type="tip">
   推荐使用邮箱注册，方便后续找回密码和接收通知。
@@ -48,8 +28,8 @@ import Callout from '../../../components/Callout.astro';
 
 注册成功后，您可以：
 
-1. **[创建专属 Key](/docs/model-apis)** — 获取 API 密钥
-2. **[充值](/docs/pricing)** — 为账户充值
+1. **<a href="https://ai.nebulatrip.com/console/token" target="_blank">创建专属 Key</a>** — 获取 API 密钥
+2. **<a href="https://ai.nebulatrip.com/console/topup" target="_blank">充值</a>** — 为账户充值
 3. 开始使用 AI 编程工具
 
 ## 常见问题
@@ -63,52 +43,9 @@ import Callout from '../../../components/Callout.astro';
 
 ### 忘记密码怎么办？
 
-在登录页面点击 **"忘记密码"**，通过注册邮箱重置密码。
+在登录页面点击 **<a href="https://ai.nebulatrip.com/reset" target="_blank">"忘记密码"</a>**，通过注册邮箱重置密码。
 
 ---
-
-## 创建专属 Key
-
-注册登录后，点击创建专属 Key。
-
-### 创建步骤
-
-1. 登录 Nebula API 平台
-2. 进入控制台
-3. 点击 **"创建 Key"** 按钮
-4. 配置 Key 参数
-5. 保存并复制 Key
-
-## Key 类型
-
-根据您要使用的工具，选择对应的令牌组：
-
-### Claude Code 令牌
-
-用于 Claude Code CLI 工具，支持 Claude 系列模型。
-
-### CodeX 令牌
-
-用于 CodeX 工具，需要选择 "codex测试" 令牌组。
-
-### Gemini CLI 令牌
-
-用于 Gemini CLI 工具，支持 Gemini 系列模型。
-
-<Callout type="important">
-  不同工具需要使用不同的令牌组，请根据您的需求创建对应的 Key。
-</Callout>
-
-## Key 配置参数
-
-创建 Key 时，可以配置以下参数：
-
-| 参数 | 说明 |
-|------|------|
-| 名称 | 为您的 Key 设置一个易于识别的名称 |
-| 令牌组 | 选择对应的工具令牌组 |
-| 配额限制 | 无限额度或自定义额度限制 |
-| 过期时间 | 设置有效期或永不过期 |
 
 ## 安全建议
 
@@ -128,7 +65,3 @@ import Callout from '../../../components/Callout.astro';
 # 示例 Key（请替换为您的实际 Key）
 sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
-
-<Callout type="warning">
-  Key 只会显示一次，请务必保存好。如果丢失，需要重新创建。
-</Callout>
