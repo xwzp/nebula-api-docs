@@ -1,0 +1,94 @@
+---
+title: 接入 OpenClaw
+description: 通过 OpenClaw 快速接入 Nebula API，配置模型并开始使用。
+section: 使用指南
+order: 5
+prev:
+  title: 注册账号
+  href: /docs/user-guide
+next:
+  title: Windows 平台
+  href: /docs/installation/windows
+---
+
+import Callout from '../../../components/Callout.astro';
+
+已安装 <a href="https://openclaw.ai" target="_blank">OpenClaw</a> 后，只需三条命令即可接入 Nebula API。
+
+## macOS / Linux
+
+打开 **终端（Terminal）**，依次执行以下命令：
+
+### 1. 添加 Provider
+
+```bash
+openclaw config set models.providers.nebula '{
+  baseUrl: "https://ai.nebulatrip.com/v1",
+  apiKey: "sk-xxxxx",
+  api: "anthropic-messages",
+  models: [
+    { id: "claude-opus-4-5", name: "Claude Opus 4.5", reasoning: true, input: ["text", "image"], contextWindow: 200000, maxTokens: 64000 },
+    { id: "claude-opus-4-6", name: "Claude Opus 4.6", reasoning: true, input: ["text", "image"], contextWindow: 1000000, maxTokens: 128000 },
+    { id: "claude-sonnet-4-5", name: "Claude Sonnet 4.5", reasoning: true, input: ["text", "image"], contextWindow: 1000000, maxTokens: 64000 },
+    { id: "claude-sonnet-4-6", name: "Claude Sonnet 4.6", reasoning: true, input: ["text", "image"], contextWindow: 1000000, maxTokens: 128000 }
+  ]
+}' --strict-json
+```
+
+<Callout type="important">
+  请将 `sk-xxxxx` 替换为你在 <a href="https://ai.nebulatrip.com/console/token" target="_blank">控制台</a> 创建的专属 Key。
+</Callout>
+
+### 2. 设置默认模型
+
+```bash
+openclaw models set nebula/claude-opus-4-6
+```
+
+### 3. 重启 Gateway 生效
+
+```bash
+openclaw gateway restart
+```
+
+---
+
+## Windows
+
+打开 **PowerShell**，执行相同的三条命令：
+
+### 1. 添加 Provider
+
+```powershell
+openclaw config set models.providers.nebula '{
+  baseUrl: "https://ai.nebulatrip.com/v1",
+  apiKey: "sk-xxxxx",
+  api: "anthropic-messages",
+  models: [
+    { id: "claude-opus-4-5", name: "Claude Opus 4.5", reasoning: true, input: ["text", "image"], contextWindow: 200000, maxTokens: 64000 },
+    { id: "claude-opus-4-6", name: "Claude Opus 4.6", reasoning: true, input: ["text", "image"], contextWindow: 1000000, maxTokens: 128000 },
+    { id: "claude-sonnet-4-5", name: "Claude Sonnet 4.5", reasoning: true, input: ["text", "image"], contextWindow: 1000000, maxTokens: 64000 },
+    { id: "claude-sonnet-4-6", name: "Claude Sonnet 4.6", reasoning: true, input: ["text", "image"], contextWindow: 1000000, maxTokens: 128000 }
+  ]
+}' --strict-json
+```
+
+<Callout type="important">
+  请将 `sk-xxxxx` 替换为你在 <a href="https://ai.nebulatrip.com/console/token" target="_blank">控制台</a> 创建的专属 Key。
+</Callout>
+
+### 2. 设置默认模型
+
+```powershell
+openclaw models set nebula/claude-opus-4-6
+```
+
+### 3. 重启 Gateway 生效
+
+```powershell
+openclaw gateway restart
+```
+
+---
+
+配置完成后，即可通过 OpenClaw 使用 Nebula 提供的 Claude 系列模型。

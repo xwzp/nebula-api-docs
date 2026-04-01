@@ -22,9 +22,7 @@ export const sidebarSections: SidebarSection[] = [
     title: '使用指南',
     items: [
       { label: '注册账号', href: '/docs/user-guide', icon: 'user-plus', color: 'text-blue-500' },
-      { label: '创建专属 Key', href: '/docs/user-guide#创建专属-key', icon: 'key', color: 'text-blue-500' },
-      { label: '修改令牌设置', href: '/docs/guide/modify-token', icon: 'settings', color: 'text-blue-500' },
-      { label: '充值', href: '/docs/pricing', icon: 'credit-card', color: 'text-blue-500' },
+      { label: '接入 OpenClaw', href: '/docs/user-guide/openclaw', icon: 'lobster', color: 'text-red-500' },
     ],
   },
   {
